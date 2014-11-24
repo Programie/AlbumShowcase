@@ -47,6 +47,10 @@ $(function()
 				table.append(row);
 
 				cell = $("<th>");
+				cell.text("#");
+				row.append(cell);
+
+				cell = $("<th>");
 				cell.text("Title");
 				row.append(cell);
 
@@ -69,6 +73,10 @@ $(function()
 
 					row = $("<tr>");
 					table.append(row);
+
+					cell = $("<td>");
+					cell.text(trackData.number);
+					row.append(cell);
 
 					cell = $("<td>");
 					cell.text(trackData.title);

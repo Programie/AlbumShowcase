@@ -18,10 +18,11 @@ CREATE TABLE `downloads` (
 CREATE TABLE `tracks` (
 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 	`albumId` int(11) NOT NULL,
+	`number` int(11) NOT NULL,
 	`artist` varchar(200) NOT NULL DEFAULT '',
 	`title` varchar(200) NOT NULL DEFAULT '',
 	`length` int(11) NOT NULL,
 	PRIMARY KEY (`id`),
 	KEY `albumId` (`albumId`),
 	CONSTRAINT `tracks_ibfk_1` FOREIGN KEY (`id`) REFERENCES `albums` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;

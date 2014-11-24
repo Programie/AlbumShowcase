@@ -19,7 +19,7 @@ switch($_GET["get"])
 		}
 
 		$query = $pdo->prepare("
-			SELECT `artist`, `title`, `length`
+			SELECT `number`, `artist`, `title`, `length`
 			FROM `tracks`
 			WHERE `albumId` = :albumId
 		");
@@ -35,7 +35,17 @@ switch($_GET["get"])
 			exit;
 		}
 
-		echo json_encode($query->fetchAll());
+		$list = array();
+
+		while ($row = $query->fetch())
+		{
+			$row->number = (int) $row->number;
+			$row->length = (int) $row->length;
+
+			$list[] = $row;
+		}
+
+		echo json_encode($list);
 		exit;
 }
 
