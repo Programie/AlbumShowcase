@@ -1,0 +1,6 @@
+.idea
+config.inc.php
+
+# OS X
+._*
+.AppleDouble
