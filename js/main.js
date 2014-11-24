@@ -43,8 +43,11 @@ $(function()
 				tracklistContent.empty();// Make sure the content is still empty after data has been loaded
 				tracklistContent.append(table);
 
+				var header = $("<thead>");
+				table.append(header);
+
 				row = $("<tr>");
-				table.append(row);
+				header.append(row);
 
 				cell = $("<th>");
 				cell.text("#");
@@ -62,9 +65,16 @@ $(function()
 				cell.text("Length");
 				row.append(cell);
 
+				var body = $("<tbody>");
+				table.append(body);
+
+				var totalLength = 0;
+
 				for (var index in data)
 				{
 					var trackData = data[index];
+
+					totalLength += trackData.length;
 
 					trackData.length = formatTime(trackData.length);
 
@@ -72,7 +82,7 @@ $(function()
 					var seconds = trackData.length.seconds.toString();
 
 					row = $("<tr>");
-					table.append(row);
+					body.append(row);
 
 					cell = $("<td>");
 					cell.text(trackData.number);
@@ -90,6 +100,30 @@ $(function()
 					cell.text(minutes.paddingLeft("00") + ":" + seconds.paddingLeft("00"));
 					row.append(cell);
 				}
+
+				totalLength = formatTime(totalLength);
+
+				var totalMinutes = totalLength.minutes.toString();
+				var totalSeconds = totalLength.seconds.toString();
+
+				var footer = $("<tfoot>");
+				table.append(footer);
+
+				row = $("<tr>");
+				footer.append(row);
+
+				cell = $("<th>");
+				row.append(cell);
+
+				cell = $("<th>");
+				row.append(cell);
+
+				cell = $("<th>");
+				row.append(cell);
+
+				cell = $("<th>");
+				cell.text(totalMinutes.paddingLeft("00") + ":" + totalSeconds.paddingLeft("00"));
+				row.append(cell);
 			},
 			url : "ajax.php?get=tracklist&id=" + albumRootElement.data("albumid")
 		});
