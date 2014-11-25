@@ -5,7 +5,7 @@
  */
 
 // Database connection
-define("DATABASE_DSN", "mysql://host=localhost;dbname=albumshowcase");
+define("DATABASE_DSN", "mysql:host=localhost;dbname=albumshowcase");
 define("DATABASE_USERNAME", "root");
 define("DATABASE_PASSWORD", "");
 
