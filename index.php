@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . "/includes/Database.class.php";
-
-$pdo = Database::getConnection();
+require_once __DIR__ . "/includes/config.inc.php";
 ?>
 <!DOCTYPE html>
 <html>
