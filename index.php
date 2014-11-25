@@ -51,7 +51,7 @@ $pdo = Database::getConnection();
 		<script type="text/html" id="albums-template">
 			{{#list}}
 				<div class="col-sm-6 col-md-4">
-					<div class="thumbnail album" data-albumid="{{id}}">
+					<div class="well well-sm thumbnail album" data-albumid="{{id}}">
 						<img src="coverimages/{{id}}.jpg"/>
 						<div class="caption">
 							<h3 class="album-title">{{title}} <small>{{releaseDate}}</small></h3>
