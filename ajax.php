@@ -21,7 +21,11 @@ switch($_GET["get"])
 			WHERE `albumId` = :albumId
 		");
 
-		$query = $pdo->query("SELECT `id`, `title`, `releaseDate` FROM `albums`");
+		$query = $pdo->query("
+			SELECT `id`, `title`, `releaseDate`
+			FROM `albums`
+			ORDER BY `releaseDate` DESC
+		");
 		while ($row = $query->fetch())
 		{
 			$row->id = (int) $row->id;
