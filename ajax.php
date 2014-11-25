@@ -29,7 +29,6 @@ switch($_GET["get"])
 		while ($row = $query->fetch())
 		{
 			$row->id = (int) $row->id;
-			$row->releaseDate = date(DATE_FORMAT, strtotime($row->releaseDate));
 
 			$downloadsQuery->execute(array
 			(

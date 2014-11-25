@@ -3,20 +3,6 @@ String.prototype.paddingLeft = function(paddingValue)
 	return String(paddingValue + this).slice(-paddingValue.length);
 };
 
-function formatTime(seconds)
-{
-	var minutesDivisor = seconds % (60 * 60);
-	var secondsDivisor = minutesDivisor % 60;
-
-	var result =
-	{
-		minutes : Math.floor(seconds / 60),
-		seconds : Math.ceil(secondsDivisor)
-	};
-
-	return result;
-}
-
 $(function()
 {
 	$("#albums").on("click", ".show-tracklist-button", function()
@@ -35,29 +21,32 @@ $(function()
 			dataType : "json",
 			success : function(data)
 			{
+				var duration;
+				var minutes;
+				var seconds;
 				var totalLength = 0;
 
 				for (var index in data)
 				{
 					totalLength += data[index].length;
 
-					var length = formatTime(data[index].length);
+					duration = moment.duration(data[index].length * 1000);
 
-					var minutes = length.minutes.toString();
-					var seconds = length.seconds.toString();
+					minutes = Math.floor(duration.asMinutes()).toString();
+					seconds = duration.seconds().toString();
 
 					data[index].length = minutes.paddingLeft("00") + ":" + seconds.paddingLeft("00");
 				}
 
-				totalLength = formatTime(totalLength);
+				duration = moment.duration(totalLength * 1000);
 
-				var totalMinutes = totalLength.minutes.toString();
-				var totalSeconds = totalLength.seconds.toString();
+				minutes = Math.floor(duration.asMinutes()).toString();
+				seconds = duration.seconds().toString();
 
 				$("#tracklist-content").html(Mustache.render($("#tracklist-template").html(),
 				{
 					list : data,
-					totalLength : totalMinutes.paddingLeft("00") + ":" + totalSeconds.paddingLeft("00")
+					totalLength : minutes.paddingLeft("00") + ":" + seconds.paddingLeft("00")
 				}));
 			},
 			url : "ajax.php?get=tracklist&id=" + albumRootElement.data("albumid")
@@ -69,6 +58,11 @@ $(function()
 		dataType : "json",
 		success : function(data)
 		{
+			for (var index in data)
+			{
+				data[index].releaseDate = moment(data[index].releaseDate, "YYYY-MM-DD").format("L");
+			}
+
 			$("#albums").html(Mustache.render($("#albums-template").html(),
 			{
 				list : data

@@ -10,5 +10,3 @@ define("DATABASE_USERNAME", "root");
 define("DATABASE_PASSWORD", "");
 
 define("PAGE_TITLE", "Album Showcase");
-
-define("DATE_FORMAT", "d.m.Y");

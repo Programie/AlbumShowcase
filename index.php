@@ -12,6 +12,7 @@ require_once __DIR__ . "/includes/config.inc.php";
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="text/javascript" src="js/mustache.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
 
 		<script type="text/javascript" src="js/main.js"></script>
 
