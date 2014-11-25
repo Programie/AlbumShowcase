@@ -35,7 +35,7 @@ switch($_GET["get"])
 				":albumId" => $row->id
 			));
 
-			$row->downloadCount = $downloadsQuery->fetch()->count;
+			$row->downloadCount = (int) $downloadsQuery->fetch()->count;
 
 			$list[] = $row;
 		}

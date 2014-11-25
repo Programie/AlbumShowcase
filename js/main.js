@@ -3,6 +3,21 @@ String.prototype.paddingLeft = function(paddingValue)
 	return String(paddingValue + this).slice(-paddingValue.length);
 };
 
+Number.prototype.short = function()
+{
+	if (this < 1000)
+	{
+		return this;
+	}
+
+	if (this < 1000 * 1000)
+	{
+		return Math.floor(this / 1000) + "K";
+	}
+
+	return "999K+";
+};
+
 $(function()
 {
 	$("#albums").on("click", ".show-tracklist-button", function()
@@ -60,7 +75,10 @@ $(function()
 		{
 			for (var index in data)
 			{
-				data[index].releaseDate = moment(data[index].releaseDate, "YYYY-MM-DD").format("L");
+				var albumData = data[index];
+
+				albumData.releaseDate = moment(albumData.releaseDate, "YYYY-MM-DD").format("L");
+				albumData.downloadCount = albumData.downloadCount.short();
 			}
 
 			$("#albums").html(Mustache.render($("#albums-template").html(),
