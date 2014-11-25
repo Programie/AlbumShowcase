@@ -11,6 +11,19 @@ $pdo = Database::getConnection();
 
 switch($_GET["get"])
 {
+	case "albums":
+		$list = array();
+
+		$query = $pdo->query("SELECT `id`, `title`, `releaseDate` FROM `albums`");
+		while ($row = $query->fetch())
+		{
+			$row->id = (int) $row->id;
+
+			$list[] = $row;
+		}
+
+		echo json_encode($list);
+		exit;
 	case "tracklist":
 		if (!isset($_GET["id"]))
 		{

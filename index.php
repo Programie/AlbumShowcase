@@ -13,8 +13,58 @@ $pdo = Database::getConnection();
 
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/mustache.js"></script>
 
 		<script type="text/javascript" src="js/main.js"></script>
+
+		<script type="x-tmpl-mustache" id="tracklist-template">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Title</th>
+						<th>Artist</th>
+						<th>Length</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#list}}
+						<tr>
+							<td>{{number}}</td>
+							<td>{{title}}</td>
+							<td>{{artist}}</td>
+							<td>{{length}}</td>
+						</tr>
+					{{/list}}
+				</tbody>
+				<tfoot>
+					<tr>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th>{{totalLength}}</th>
+					</tr>
+				</tfoot>
+			</table>
+		</script>
+
+		<script type="x-tmpl-mustache" id="albums-template">
+			{{#list}}
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail album" data-albumid="{{id}}">
+						<img src="coverimages/{{id}}.jpg"/>
+						<div class="caption">
+							<h3 class="album-title">{{title}}</h3>
+							<p class="album-releasedate">{{releaseDate}}</p>
+							<p>
+								<button class="btn btn-primary" role="button">Download</button>
+								<button class="btn btn-default show-tracklist-button" role="button">Track list</button>
+							</p>
+						</div>
+					</div>
+				</div>
+			{{/list}}
+		</script>
 	</head>
 
 	<body>
@@ -22,29 +72,7 @@ $pdo = Database::getConnection();
 			<div class="page-header">
 				<h1><?php echo PAGE_TITLE;?></h1>
 			</div>
-			<div class="row">
-				<?php
-				$query = $pdo->query("SELECT `id`, `title`, `releaseDate` FROM `albums`");
-				while ($row = $query->fetch())
-				{
-					echo "
-						<div class='col-sm-6 col-md-4'>
-							<div class='thumbnail album' data-albumid='" . $row->id . "'>
-								<img src='coverimages/" . $row->id . ".jpg'/>
-								<div class='caption'>
-									<h3 class='album-title'>" . htmlentities($row->title) . "</h3>
-									<p class='album-releasedate'>" . date(FORMAT_DATE, strtotime($row->releaseDate)) . "</p>
-									<p>
-										<button class='btn btn-primary' role='button'>Download</button>
-										<button class='btn btn-default show-tracklist-button' role='button'>Track list</button>
-									</p>
-								</div>
-							</div>
-						</div>
-					";
-				}
-				?>
-			</div>
+			<div class="row" id="albums"></div>
 		</div>
 
 		<div class="modal fade" id="tracklist" tabindex="-1" role="dialog" aria-labelledby="tracklist-label" aria-hidden="true">
