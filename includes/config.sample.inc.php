@@ -11,4 +11,4 @@ define("DATABASE_PASSWORD", "");
 
 define("PAGE_TITLE", "Album Showcase");
 
-define("FORMAT_DATE", "d.m.Y");
+define("DATE_FORMAT", "d.m.Y");

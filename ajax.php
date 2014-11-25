@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/includes/config.inc.php";
 require_once __DIR__ . "/includes/Database.class.php";
 
 if (!isset($_GET["get"]))
@@ -18,6 +19,7 @@ switch($_GET["get"])
 		while ($row = $query->fetch())
 		{
 			$row->id = (int) $row->id;
+			$row->releaseDate = date(DATE_FORMAT, strtotime($row->releaseDate));
 
 			$list[] = $row;
 		}
