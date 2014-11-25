@@ -20,7 +20,7 @@ Number.prototype.short = function()
 
 $(function()
 {
-	$("#albums").on("click", ".show-tracklist-button", function()
+	$("#albums").on("click", ".tracklist-button", function()
 	{
 		$("#tracklist").modal("show");
 

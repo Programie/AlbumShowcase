@@ -51,12 +51,12 @@ require_once __DIR__ . "/includes/config.inc.php";
 			{{#list}}
 				<div class="col-sm-6 col-md-4">
 					<div class="well well-sm thumbnail album" data-albumid="{{id}}">
-						<img src="coverimages/{{id}}.jpg"/>
+						<img src="albums/{{id}}.jpg"/>
 						<div class="caption">
 							<h3 class="album-title">{{title}} <small>{{releaseDate}}</small></h3>
 							<p>
-								<button class="btn btn-primary" role="button">Download <span class="badge">{{downloadCount}}</span></button>
-								<button class="btn btn-default show-tracklist-button" role="button">Track list</button>
+								<a href="download.php/{{id}}/{{title}}.zip" class="btn btn-primary" role="button">Download <span class="badge">{{downloadCount}}</span></a>
+								<button class="btn btn-default tracklist-button" role="button">Track list</button>
 							</p>
 						</div>
 					</div>
