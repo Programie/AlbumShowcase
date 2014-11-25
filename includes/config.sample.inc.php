@@ -9,4 +9,5 @@ define("DATABASE_DSN", "mysql:host=localhost;dbname=albumshowcase");
 define("DATABASE_USERNAME", "root");
 define("DATABASE_PASSWORD", "");
 
+// Title of the page (Displayed as page title and in the header section)
 define("PAGE_TITLE", "Album Showcase");
