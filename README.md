@@ -15,5 +15,5 @@ Album Showcase is a simple showcase and download page which can be used to provi
 
    * Copy **includes/config.sample.inc.php** to **includes/config.inc.php** and open the copy
    * Configure the variables to match your requirements
-   * Import the database schema from **database.sql**
+   * Import the database schema from **tools/database.sql**
    * Configure your webserver to point to the directory containing the files
