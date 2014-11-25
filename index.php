@@ -54,10 +54,9 @@ $pdo = Database::getConnection();
 					<div class="thumbnail album" data-albumid="{{id}}">
 						<img src="coverimages/{{id}}.jpg"/>
 						<div class="caption">
-							<h3 class="album-title">{{title}}</h3>
-							<p class="album-releasedate">{{releaseDate}}</p>
+							<h3 class="album-title">{{title}} <small>{{releaseDate}}</small></h3>
 							<p>
-								<button class="btn btn-primary" role="button">Download</button>
+								<button class="btn btn-primary" role="button">Download <span class="badge">{{downloadCount}}</span></button>
 								<button class="btn btn-default show-tracklist-button" role="button">Track list</button>
 							</p>
 						</div>

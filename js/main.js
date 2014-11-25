@@ -28,7 +28,7 @@ $(function()
 		var tracklistContent = $("#tracklist-content");
 		tracklistContent.empty();
 
-		$("#tracklist-label").text(albumRootElement.find(".album-title").text() + " (" + albumRootElement.find(".album-releasedate").text() + ")");
+		$("#tracklist-label").html(albumRootElement.find(".album-title").html());
 
 		$.ajax(
 		{

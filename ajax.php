@@ -15,11 +15,24 @@ switch($_GET["get"])
 	case "albums":
 		$list = array();
 
+		$downloadsQuery = $pdo->prepare("
+			SELECT COUNT(`id`) AS `count`
+			FROM `downloads`
+			WHERE `albumId` = :albumId
+		");
+
 		$query = $pdo->query("SELECT `id`, `title`, `releaseDate` FROM `albums`");
 		while ($row = $query->fetch())
 		{
 			$row->id = (int) $row->id;
 			$row->releaseDate = date(DATE_FORMAT, strtotime($row->releaseDate));
+
+			$downloadsQuery->execute(array
+			(
+				":albumId" => $row->id
+			));
+
+			$row->downloadCount = $downloadsQuery->fetch()->count;
 
 			$list[] = $row;
 		}
