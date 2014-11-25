@@ -55,8 +55,8 @@ require_once __DIR__ . "/includes/config.inc.php";
 						<div class="caption">
 							<h3 class="album-title">{{title}} <small>{{releaseDate}}</small></h3>
 							<p>
-								<a href="download.php/{{id}}/{{title}}.zip" class="btn btn-primary" role="button">Download <span class="badge">{{downloadCount}}</span></a>
-								<button class="btn btn-default tracklist-button" role="button">Track list</button>
+								<a href="download.php/{{id}}/{{title}}.zip" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-cloud-download"></span> Download{{#downloadBadge}} <span class="badge">{{downloadBadge}}</span>{{/downloadBadge}}</a>
+								<button class="btn btn-default tracklist-button" role="button"><span class="glyphicon glyphicon-th-list"></span> Track list</button>
 							</p>
 						</div>
 					</div>
