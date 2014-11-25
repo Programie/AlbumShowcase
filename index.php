@@ -17,7 +17,7 @@ $pdo = Database::getConnection();
 
 		<script type="text/javascript" src="js/main.js"></script>
 
-		<script type="x-tmpl-mustache" id="tracklist-template">
+		<script type="text/html" id="tracklist-template">
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -48,7 +48,7 @@ $pdo = Database::getConnection();
 			</table>
 		</script>
 
-		<script type="x-tmpl-mustache" id="albums-template">
+		<script type="text/html" id="albums-template">
 			{{#list}}
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail album" data-albumid="{{id}}">
