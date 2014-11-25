@@ -83,19 +83,19 @@ switch($_GET["get"])
 		{
 			$row->id = (int) $row->id;
 
-			switch (DOWNLOAD_BADGE)
+			if (defined("DOWNLOAD_BADGE"))
 			{
-				case "count":
-					$downloadsQuery->execute(array
-					(
-						":albumId" => $row->id
-					));
+				switch (DOWNLOAD_BADGE)
+				{
+					case "count":
+						$downloadsQuery->execute(array(":albumId" => $row->id));
 
-					$row->downloadBadge = shortNumber($downloadsQuery->fetch()->count);
-					break;
-				case "size":
-					$row->downloadBadge = formatFileSize(filesize(__DIR__ . "/albums/" . $row->id . ".zip"));
-					break;
+						$row->downloadBadge = shortNumber($downloadsQuery->fetch()->count);
+						break;
+					case "size":
+						$row->downloadBadge = formatFileSize(filesize(__DIR__ . "/albums/" . $row->id . ".zip"));
+						break;
+				}
 			}
 
 			$list[] = $row;
