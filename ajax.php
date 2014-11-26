@@ -32,7 +32,7 @@ function shortNumber($value)
  */
 function formatFileSize($size, $precision = 1)
 {
-	$units = array("B", "K", "M", "G", "T", "P", "E", "Z", "Y");
+	$units = array("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB");
 
 	$useUnit = null;
 
@@ -52,7 +52,7 @@ function formatFileSize($size, $precision = 1)
 		$useUnit = end($units);
 	}
 
-	return round($size, $precision) . $useUnit;
+	return round($size, $precision) . " " . $useUnit;
 }
 
 if (!isset($_GET["get"]))
