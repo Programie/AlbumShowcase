@@ -17,3 +17,7 @@ Album Showcase is a simple showcase and download page which can be used to provi
    * Configure the variables to match your requirements
    * Import the database schema from [database.sql](/tools/database.sql)
    * Configure your webserver to point to the directory containing the files
+
+## Demo
+
+A demo of Album Showcase can be found [here](http://albumshowcase-demo.selfcoders.com).
