@@ -55,6 +55,13 @@ function formatFileSize($size, $precision = 1)
 	return round($size, $precision) . " " . $useUnit;
 }
 
+function getPasswordHash($password, $salt)
+{
+	$hash = hash("sha512", $password);
+
+	return hash("sha512", $hash . $salt, true);
+}
+
 if (!isset($_GET["get"]))
 {
 	header("HTTP/1.1 400 Bad Request");
@@ -65,6 +72,49 @@ $pdo = Database::getConnection();
 
 switch($_GET["get"])
 {
+	case "checklogin":
+		if (isset($_POST["username"]) and isset($_POST["password"]))
+		{
+			$_SESSION["username"] = $_POST["username"];
+			$_SESSION["password"] = $_POST["password"];
+		}
+
+		$query = $pdo->prepare("
+			SELECT `id`, `password`, `passwordSalt`
+			FROM `users`
+			WHERE `username` = :username
+		");
+
+		$query->execute(array
+		(
+			":username" => $_SESSION["username"]
+		));
+
+		if (!$query->rowCount())
+		{
+			echo json_encode(array
+			(
+				"ok" => false
+			));
+			exit;
+		}
+
+		$row = $query->fetch();
+
+		if (getPasswordHash($_SESSION["password"], $row->passwordSalt) != $row->password)
+		{
+			echo json_encode(array
+			(
+				"ok" => false
+			));
+			exit;
+		}
+
+		echo json_encode(array
+		(
+			"ok" => true
+		));
+		exit;
 	case "albums":
 		$list = array();
 

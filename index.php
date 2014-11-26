@@ -68,7 +68,21 @@ require_once __DIR__ . "/includes/config.inc.php";
 	<body>
 		<div class="container">
 			<div class="page-header">
-				<h1><?php echo PAGE_TITLE;?></h1>
+				<?php
+				if (defined("SHOW_ADMIN_LOGIN") and SHOW_ADMIN_LOGIN)
+				{
+				?>
+					<nav>
+						<div class="nav nav-pills pull-right">
+							<a href="admin">
+								<button class="btn btn-primary btn-sm" role="button">Admin</button>
+							</a>
+						</div>
+					</nav>
+				<?php
+				}
+				?>
+				<h3 class="text-muted"><?php echo PAGE_TITLE;?></h3>
 			</div>
 			<div class="row" id="albums"></div>
 		</div>
