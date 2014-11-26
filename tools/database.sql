@@ -1,8 +1,8 @@
 
 CREATE TABLE `albums` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) NOT NULL DEFAULT '',
-  `releaseDate` date DEFAULT NULL,
+  `title` varchar(200) NOT NULL,
+  `releaseDate` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -10,7 +10,7 @@ CREATE TABLE `downloads` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `albumId` int(11) unsigned NOT NULL,
   `date` datetime NOT NULL,
-  `ipAddress` varchar(50) NOT NULL DEFAULT '',
+  `ipAddress` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `albumId` (`albumId`),
   CONSTRAINT `downloads_ibfk_1` FOREIGN KEY (`albumId`) REFERENCES `albums` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -20,8 +20,8 @@ CREATE TABLE `tracks` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `albumId` int(11) unsigned NOT NULL,
   `number` int(11) unsigned NOT NULL,
-  `artist` varchar(200) NOT NULL DEFAULT '',
-  `title` varchar(200) NOT NULL DEFAULT '',
+  `artist` varchar(200) NOT NULL,
+  `title` varchar(200) NOT NULL,
   `length` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `albumId` (`albumId`),
@@ -30,8 +30,8 @@ CREATE TABLE `tracks` (
 
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL DEFAULT '',
-  `password` binary(64) NOT NULL DEFAULT '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',
+  `username` varchar(50) NOT NULL,
+  `password` binary(64) NOT NULL,
   `passwordSalt` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
