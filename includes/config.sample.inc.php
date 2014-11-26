@@ -15,3 +15,6 @@ define("PAGE_TITLE", "Album Showcase");
 // Set what info to show in the badge in the download button (Remove to remove the badge)
 //define("DOWNLOAD_BADGE", "count");// Show the number of downloads
 define("DOWNLOAD_BADGE", "size");// Show the file size of the download
+
+// Set whether to track downloads (false or remove the definition to disable download tracking)
+define("TRACK_DOWNLOADS", true);

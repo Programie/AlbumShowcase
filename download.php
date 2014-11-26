@@ -50,3 +50,20 @@ while ($chunk = fread($file, 8192))
 }
 
 fclose($file);
+
+if (defined("TRACK_DOWNLOADS") and TRACK_DOWNLOADS)
+{
+	$query = $pdo->prepare("
+		INSERT INTO `downloads`
+		SET
+			`albumId` = :albumId,
+			`date` = NOW(),
+			`ipAddress` = :ipAddress
+	");
+
+	$query->execute(array
+	(
+		":albumId" => $albumId,
+		":ipAddress" => $_SERVER["REMOTE_ADDR"]
+	));
+}
