@@ -62,6 +62,44 @@ function getPasswordHash($password, $salt)
 	return hash("sha512", $hash . $salt, true);
 }
 
+function checkLogin()
+{
+	global $pdo;
+
+	session_start();
+
+	if (isset($_POST["username"]) and isset($_POST["password"]))
+	{
+		$_SESSION["username"] = $_POST["username"];
+		$_SESSION["password"] = $_POST["password"];
+	}
+
+	$query = $pdo->prepare("
+		SELECT `id`, `password`, `passwordSalt`
+		FROM `users`
+		WHERE `username` = :username
+	");
+
+	$query->execute(array
+	(
+		":username" => $_SESSION["username"]
+	));
+
+	if (!$query->rowCount())
+	{
+		return false;
+	}
+
+	$row = $query->fetch();
+
+	if (getPasswordHash($_SESSION["password"], $row->passwordSalt) != $row->password)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 if (!isset($_GET["get"]))
 {
 	header("HTTP/1.1 400 Bad Request");
@@ -73,47 +111,34 @@ $pdo = Database::getConnection();
 switch($_GET["get"])
 {
 	case "checklogin":
-		if (isset($_POST["username"]) and isset($_POST["password"]))
-		{
-			$_SESSION["username"] = $_POST["username"];
-			$_SESSION["password"] = $_POST["password"];
-		}
-
-		$query = $pdo->prepare("
-			SELECT `id`, `password`, `passwordSalt`
-			FROM `users`
-			WHERE `username` = :username
-		");
-
-		$query->execute(array
-		(
-			":username" => $_SESSION["username"]
-		));
-
-		if (!$query->rowCount())
-		{
-			echo json_encode(array
-			(
-				"ok" => false
-			));
-			exit;
-		}
-
-		$row = $query->fetch();
-
-		if (getPasswordHash($_SESSION["password"], $row->passwordSalt) != $row->password)
-		{
-			echo json_encode(array
-			(
-				"ok" => false
-			));
-			exit;
-		}
-
 		echo json_encode(array
 		(
-			"ok" => true
+			"ok" => checkLogin()
 		));
+		exit;
+	case "allalbums":
+		if (!checkLogin())
+		{
+			header("HTTP/1.1 401 Authorization Required");
+			exit;
+		}
+
+		$query = $pdo->query("
+			SELECT `id`, `title`, `releaseDate`
+			FROM `albums`
+			ORDER BY `releaseDate` DESC
+		");
+
+		$list = array();
+
+		while ($row = $query->fetch())
+		{
+			$row->id = (int) $row->id;
+
+			$list[] = $row;
+		}
+
+		echo json_encode($list);
 		exit;
 	case "albums":
 		$list = array();
@@ -129,6 +154,7 @@ switch($_GET["get"])
 			FROM `albums`
 			ORDER BY `releaseDate` DESC
 		");
+
 		while ($row = $query->fetch())
 		{
 			$row->id = (int) $row->id;

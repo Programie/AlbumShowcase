@@ -75,7 +75,7 @@ require_once __DIR__ . "/includes/config.inc.php";
 					<nav>
 						<div class="nav nav-pills pull-right">
 							<a href="admin">
-								<button class="btn btn-primary btn-sm" role="button">Admin</button>
+								<button class="btn btn-default btn-sm" role="button"><i class="glyphicon glyphicon-wrench"></i> Admin</button>
 							</a>
 						</div>
 					</nav>

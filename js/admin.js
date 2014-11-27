@@ -1,11 +1,23 @@
 $(function()
 {
+	$("#album-list").on("click", ".delete-album", function()
+	{
+		$("#delete-confirmation-album").text($(this).closest(".album-row").find(".album-title").text());
+
+		$("#delete-confirmation").modal("show");
+	});
+
 	$.ajax(
 	{
 		dataType : "json",
 		success : function(data)
 		{
-			if (!data.ok)
+			if (data.ok)
+			{
+				$("#loggedin").show();
+				loadAlbums();
+			}
+			else
 			{
 				$("#login").show();
 			}
@@ -34,6 +46,8 @@ function login()
 			if (data.ok)
 			{
 				$("#login").hide();
+				$("#loggedin").show();
+				loadAlbums();
 			}
 			else
 			{
@@ -51,5 +65,32 @@ function login()
 		},
 		type : "POST",
 		url : "../ajax.php?get=checklogin"
+	});
+}
+
+function loadAlbums()
+{
+	$.ajax(
+	{
+		dataType : "json",
+		error : function(jqXhr)
+		{
+			console.log(jqXhr);
+		},
+		success : function(data)
+		{
+			for (var index in data)
+			{
+				var albumData = data[index];
+
+				albumData.releaseDate = moment(albumData.releaseDate, "YYYY-MM-DD").format("L");
+			}
+
+			$("#album-list").html(Mustache.render($("#album-list-template").html(),
+			{
+				list : data
+			}));
+		},
+		url : "../ajax.php?get=allalbums"
 	});
 }
