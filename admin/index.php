@@ -33,7 +33,7 @@ require_once __DIR__ . "/../includes/config.inc.php";
 	<body>
 		<div class="container">
 			<div class="page-header">
-				<nav>
+				<nav class="show-loggedin">
 					<div class="nav nav-pills pull-right">
 						<button class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-plus"></i> New Album</button>
 						<button class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-off"></i> Logout</button>
@@ -59,7 +59,7 @@ require_once __DIR__ . "/../includes/config.inc.php";
 				</form>
 			</div>
 
-			<div id="loggedin">
+			<div class="show-loggedin">
 				<table class="table table-responsive">
 					<thead>
 						<tr>

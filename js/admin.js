@@ -14,7 +14,7 @@ $(function()
 		{
 			if (data.ok)
 			{
-				$("#loggedin").show();
+				$(".show-loggedin").show();
 				loadAlbums();
 			}
 			else
@@ -46,7 +46,7 @@ function login()
 			if (data.ok)
 			{
 				$("#login").hide();
-				$("#loggedin").show();
+				$(".show-loggedin").show();
 				loadAlbums();
 			}
 			else
