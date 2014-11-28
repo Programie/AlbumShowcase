@@ -59,8 +59,10 @@ require_once __DIR__ . "/../includes/config.inc.php";
 
 					<p class="label label-danger" id="login-info"></p>
 
-					<input type="text" id="username" class="form-control" placeholder="Username" required="" autofocus=""/>
-					<input type="password" id="password" class="form-control" placeholder="Password" required=""/>
+					<div class="form-control-group">
+						<input type="text" id="username" class="form-control" placeholder="Username" required="" autofocus=""/>
+						<input type="password" id="password" class="form-control" placeholder="Password" required=""/>
+					</div>
 
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 				</form>
@@ -112,9 +114,11 @@ require_once __DIR__ . "/../includes/config.inc.php";
 							<div class="form">
 								<p class="label label-danger" id="change-password-info"></p>
 
-								<input type="password" id="current-password" class="form-control" placeholder="Current password" required="" autofocus=""/>
-								<input type="password" id="new-password" class="form-control" placeholder="New password" required="" autofocus=""/>
-								<input type="password" id="new-password-confirm" class="form-control" placeholder="Repeat new password" required="" autofocus=""/>
+								<div class="form-control-group">
+									<input type="password" id="current-password" class="form-control" placeholder="Current password" required="" autofocus=""/>
+									<input type="password" id="new-password" class="form-control" placeholder="New password" required="" autofocus=""/>
+									<input type="password" id="new-password-confirm" class="form-control" placeholder="Repeat new password" required="" autofocus=""/>
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
