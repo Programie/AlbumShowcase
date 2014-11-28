@@ -119,7 +119,8 @@ $albums = array
 			array
 			(
 				"title" => "Sample Man",
-				"artist" => "K Sample"
+				"artist" => "K Sample",
+				"length" => 201
 			)
 		)
 	),
