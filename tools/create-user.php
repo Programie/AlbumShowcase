@@ -49,15 +49,22 @@ if ($query->rowCount())
 	}
 }
 
-$charset = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
-$password = array();
-$charsetLength = strlen($charset);
-for ($character = 0; $character < 10; $character++)
+if (strtolower($username) == "demo")
 {
-	$password[] = $charset[rand(0, $charsetLength - 1)];
+	$password = "demo";
 }
+else
+{
+	$charset = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+	$password = array();
+	$charsetLength = strlen($charset);
+	for ($character = 0; $character < 10; $character++)
+	{
+		$password[] = $charset[rand(0, $charsetLength - 1)];
+	}
 
-$password = implode("", $password);
+	$password = implode("", $password);
+}
 
 $hash = hash("sha512", $password);
 $salt = rand(0, 10000);
