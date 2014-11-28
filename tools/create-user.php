@@ -4,10 +4,15 @@ require_once __DIR__ . "/../includes/Database.class.php";
 
 if (count($argv) < 2)
 {
-	die("Usage: " . $argv[0] . " <username>");
+	echo "Usage: " . $argv[0] . " <username> [<replace>]\n";
+	echo "\n\n";
+	echo "Example 1: " . $argv[0] . " admin\n";
+	echo "Example 2: " . $argv[0] . " admin 1\n";
+	exit;
 }
 
 $username = $argv[1];
+$replace = @$argv[2];
 
 $pdo = Database::getConnection();
 
@@ -24,7 +29,24 @@ $query->execute(array
 
 if ($query->rowCount())
 {
-	die("User '" . $username . "' already exists!");
+	if ($replace)
+	{
+		$row = $query->fetch();
+
+		$query = $pdo->prepare("
+			DELETE FROM `users`
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":id" => $row->id
+		));
+	}
+	else
+	{
+		die("User '" . $username . "' already exists!");
+	}
 }
 
 $charset = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
