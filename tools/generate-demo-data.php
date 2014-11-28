@@ -97,6 +97,57 @@ $albums = array
 				"length" => 268
 			)
 		)
+	),
+	array
+	(
+		"title" => "Resampled",
+		"releaseDate" => date("Y") . "-10-20",
+		"tracks" => array
+		(
+			array
+			(
+				"title" => "No Samples no Cry",
+				"artist" => "Bob Simply",
+				"length" => 231
+			),
+			array
+			(
+				"title" => "We found Samples",
+				"artist" => "Semplhana",
+				"length" => 242
+			),
+			array
+			(
+				"title" => "Sample Man",
+				"artist" => "K Sample"
+			)
+		)
+	),
+	array
+	(
+		"title" => "The best Samples",
+		"releaseDate" => date("Y") . "-12-01",
+		"track" => array
+		(
+			array
+			(
+				"title" => "We found Samples",
+				"artist" => "The missing Sample",
+				"length" => 196
+			),
+			array
+			(
+				"title" => "My Song",
+				"artist" => "DJ Me",
+				"length" => 197
+			),
+			array
+			(
+				"title" => "No Samples no Cry",
+				"artist" => "Bob Simply",
+				"length" => 231
+			)
+		)
 	)
 );
 
