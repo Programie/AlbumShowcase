@@ -20,4 +20,4 @@ Album Showcase is a simple showcase and download page which can be used to provi
 
 ## Demo
 
-A demo of Album Showcase can be found [here](http://albumshowcase-demo.selfcoders.com).
+A demo of Album Showcase can be found [here](http://albumshowcase-demo.selfcoders.com). The username and password for the admin area is "demo".
