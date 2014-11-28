@@ -67,16 +67,18 @@ require_once __DIR__ . "/../includes/config.inc.php";
 			</div>
 
 			<div class="show-loggedin">
-				<table class="table table-responsive">
-					<thead>
-						<tr>
-							<th>Title</th>
-							<th>Release Date</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody id="album-list"></tbody>
-				</table>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Release Date</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="album-list"></tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 
