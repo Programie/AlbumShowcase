@@ -62,16 +62,30 @@ function getPasswordHash($password, $salt)
 	return hash("sha512", $hash . $salt, true);
 }
 
-function checkLogin()
+function checkLogin($save = true, $username = null, $password = null)
 {
 	global $pdo;
 
 	session_start();
 
-	if (isset($_POST["username"]) and isset($_POST["password"]))
+	if ($username === null)
 	{
-		$_SESSION["username"] = $_POST["username"];
-		$_SESSION["password"] = $_POST["password"];
+		$username = $_POST["username"];
+	}
+
+	if ($username === null)
+	{
+		$username = $_SESSION["username"];
+	}
+
+	if ($password === null)
+	{
+		$password = $_POST["password"];
+	}
+
+	if ($password === null)
+	{
+		$password = $_SESSION["password"];
 	}
 
 	$query = $pdo->prepare("
@@ -82,7 +96,7 @@ function checkLogin()
 
 	$query->execute(array
 	(
-		":username" => $_SESSION["username"]
+		":username" => $username
 	));
 
 	if (!$query->rowCount())
@@ -92,9 +106,15 @@ function checkLogin()
 
 	$row = $query->fetch();
 
-	if (getPasswordHash($_SESSION["password"], $row->passwordSalt) != $row->password)
+	if (getPasswordHash($password, $row->passwordSalt) != $row->password)
 	{
 		return false;
+	}
+
+	if ($save)
+	{
+		$_SESSION["username"] = $username;
+		$_SESSION["password"] = $password;
 	}
 
 	return true;
@@ -113,7 +133,49 @@ switch($_GET["get"])
 	case "checklogin":
 		echo json_encode(array
 		(
-			"ok" => checkLogin()
+			"ok" => checkLogin(),
+			"username" => $_SESSION["username"]
+		));
+		exit;
+	case "changepassword":
+		if (!checkLogin(false, $_SESSION["username"], $_POST["currentPassword"]))
+		{
+			echo json_encode(array
+			(
+				"ok" => false
+			));
+			exit;
+		}
+
+		$query = $pdo->prepare("
+			UPDATE `users`
+			SET `password` = :password, `passwordSalt` = :passwordSalt
+			WHERE `username` = :username
+		");
+
+		$passwordSalt = rand(0, 10000);
+
+		$query->execute(array
+		(
+			":username" => $_SESSION["username"],
+			":password" => getPasswordHash($_POST["newPassword"], $passwordSalt),
+			":passwordSalt" => $passwordSalt
+		));
+
+		session_destroy();// Force re-login
+
+		echo json_encode(array
+		(
+			"ok" => true
+		));
+		exit;
+	case "logout":
+		session_start();
+		session_destroy();
+
+		echo json_encode(array
+		(
+			"ok" => true
 		));
 		exit;
 	case "allalbums":

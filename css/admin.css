@@ -3,19 +3,19 @@ body
 	background-color: #eee;
 }
 
-.form-login
+.form
 {
 	max-width: 330px;
 	padding: 15px;
 	margin: 0 auto;
 }
 
-.form-login .form-login-heading, .form-login
+.form .form-heading, .form
 {
 	margin-bottom: 10px;
 }
 
-.form-login .form-control
+.form-control
 {
 	position: relative;
 	height: auto;
@@ -38,7 +38,7 @@ body
 	padding-bottom: 40px;
 }
 
-#login-info
+#login-info, #change-password-info
 {
 	display: none;
 }
