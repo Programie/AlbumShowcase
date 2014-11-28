@@ -86,7 +86,21 @@ function changePassword()
 			}
 			else
 			{
-				$("#change-password-info").text("The current password is wrong!").show();
+				var reason;
+
+				switch (data.reason)
+				{
+					case "auth_fail":
+						reason = "The current password is wrong!";
+						break;
+					case "demo_user":
+						reason = "The password of the demo user can't be changed!";
+						break;
+					default:
+						reason = "Unknown error: " + data.reason;
+				}
+
+				$("#change-password-info").text(reason).show();
 
 				shake($("#change-password"));
 			}

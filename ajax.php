@@ -142,7 +142,18 @@ switch($_GET["get"])
 		{
 			echo json_encode(array
 			(
-				"ok" => false
+				"ok" => false,
+				"reason" => "auth_fail"
+			));
+			exit;
+		}
+
+		if (strtolower($_SESSION["username"]) == "demo")
+		{
+			echo json_encode(array
+			(
+				"ok" => false,
+				"reason" => "demo_user"
 			));
 			exit;
 		}
