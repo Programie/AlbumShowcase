@@ -9,9 +9,7 @@ $(function()
 			dataType : "json",
 			success : function()
 			{
-				$("#confirm-logout").modal("hide");
-				$(".show-loggedin").hide();
-				$("#login").show();
+				document.location.href = "..";
 			},
 			url : "../ajax.php?get=logout"
 		});
