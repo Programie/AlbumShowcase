@@ -62,7 +62,7 @@ $(function()
 			{
 				var albumData = data[index];
 
-				albumData.releaseDate = moment(albumData.releaseDate, "YYYY-MM-DD").format("L");
+				albumData.releaseDate = moment(albumData.releaseDate).format("L");
 			}
 
 			$("#albums").html(Mustache.render($("#albums-template").html(),
