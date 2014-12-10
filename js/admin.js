@@ -149,10 +149,6 @@ function loadAlbums()
 	$.ajax(
 	{
 		dataType : "json",
-		error : function(jqXhr)
-		{
-			console.log(jqXhr);
-		},
 		success : function(data)
 		{
 			for (var index in data)
