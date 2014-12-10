@@ -113,7 +113,11 @@ function login()
 	var username = $("#username").val();
 	var password = $("#password").val();
 
-	// TODO: Check if username and password has been entered
+	if (!username || !password)
+	{
+		$("#login-info").text("Please enter a username and password!").show();
+		return;
+	}
 
 	$.ajax(
 	{
