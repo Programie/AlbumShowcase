@@ -15,7 +15,7 @@ body
 	margin-bottom: 10px;
 }
 
-.form-control
+.form-control-large
 {
 	position: relative;
 	height: auto;
@@ -43,6 +43,11 @@ body
 	display: none;
 }
 
+#edit-album-tab-general
+{
+	padding: 10px;
+}
+
 .form-control-group
 {
 	margin-bottom: 10px;
@@ -59,4 +64,10 @@ body
 {
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
+}
+
+.modal-dialog
+{
+	/* Fix for datepicker in modal dialog */
+	z-index:1150;
 }

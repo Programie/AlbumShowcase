@@ -189,6 +189,211 @@ switch($_GET["get"])
 			"ok" => true
 		));
 		exit;
+	case "albumdata":
+		if (!checkLogin())
+		{
+			header("HTTP/1.1 401 Authorization Required");
+			exit;
+		}
+
+		if (!isset($_GET["id"]))
+		{
+			header("HTTP/1.1 400 Bad Request");
+			exit;
+		}
+
+		$albumId = $_GET["id"];
+
+		$query = $pdo->prepare("
+			SELECT `title`, `releaseDate`
+			FROM `albums`
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":id" => $albumId
+		));
+
+		if (!$query->rowCount())
+		{
+			header("HTTP/1.1 404 Not Found");
+			exit;
+		}
+
+		$albumData = $query->fetch();
+
+		$query = $pdo->prepare("
+			SELECT `number`, `artist`, `title`, `length`
+			FROM `tracks`
+			WHERE `albumId` = :albumId
+		");
+
+		$query->execute(array
+		(
+			":albumId" => $albumId
+		));
+
+		$albumData->tracks = array();
+
+		while ($row = $query->fetch())
+		{
+			$row->number = (int) $row->number;
+			$row->length = (int) $row->length;
+
+			$albumData->tracks[] = $row;
+		}
+
+		echo json_encode($albumData);
+		exit;
+	case "savealbum":
+		if (!checkLogin())
+		{
+			header("HTTP/1.1 401 Authorization Required");
+			exit;
+		}
+
+		$albumId = null;
+		if (isset($_GET["id"]))
+		{
+			$albumId = $_GET["id"];
+		}
+
+		$data = json_decode(file_get_contents("php://input"));
+		if (!$data)
+		{
+			header("HTTP/1.1 400 Bad Request");
+			exit;
+		}
+
+		if (!isset($data->title) or !isset($data->releaseDate) or !isset($data->tracks) or !is_array($data->tracks))
+		{
+			header("HTTP/1.1 400 Bad Request");
+			exit;
+		}
+
+		if ($albumId)
+		{
+			$query = $pdo->prepare("
+				UPDATE `albums`
+				SET
+					`title` = :title,
+					`releaseDate` = :releaseDate
+				WHERE `id` = :id
+			");
+
+			$query->execute(array
+			(
+				":title" => $data->title,
+				":releaseDate" => $data->releaseDate,
+				":id" => $albumId
+			));
+		}
+		else
+		{
+			$query = $pdo->prepare("
+				INSERT INTO `albums`
+				SET
+					`title` = :title,
+					`releaseDate` = :releaseDate
+			");
+
+			$query->execute(array
+			(
+				":title" => $data->title,
+				":releaseDate" => $data->releaseDate
+			));
+
+			$albumId = $pdo->lastInsertId();
+		}
+
+		$updateQuery = $pdo->prepare("
+			UPDATE `tracks`
+			SET
+				`number` = :number,
+				`artist` = :artist,
+				`title` = :title,
+				`length` = :length
+			WHERE `id` = :id
+		");
+
+		$insertQuery = $pdo->prepare("
+			INSERT INTO `tracks`
+			SET
+				`albumId` = :albumId,
+				`number` = :number,
+				`artist` = :artist,
+				`title` = :title,
+				`length` = :length
+		");
+
+		$query = $pdo->prepare("
+			SELECT `id`
+			FROM `tracks`
+			WHERE `albumId` = :albumId
+		");
+
+		$query->execute(array
+		(
+			":albumId" => $albumId
+		));
+
+		$validTracks = array();
+
+		while ($row = $query->fetch())
+		{
+			$validTracks[$row->id] = false;// Default to invalid
+		}
+
+		foreach ($data->tracks as $track)
+		{
+			if ($track->id)
+			{
+				$updateQuery->execute(array
+				(
+					":number" => $track->number,
+					":artist" => $track->artist,
+					":title" => $track->title,
+					":length" => $track->length,
+					":id" => $track->id
+				));
+			}
+			else
+			{
+				$insertQuery->execute(array
+				(
+					":albumId" => $albumId,
+					":number" => $track->number,
+					":artist" => $track->artist,
+					":title" => $track->title,
+					":length" => $track->length
+				));
+
+				$track->id = $pdo->lastInsertId();
+			}
+
+			$validTracks[$track->id] = true;// This track is still valid
+		}
+
+		$query = $pdo->prepare("
+			DELETE FROM `tracks`
+			WHERE `id` = :id
+		");
+
+		foreach ($validTracks as $trackId => $isValid)
+		{
+			if ($isValid)
+			{
+				continue;
+			}
+
+			// Delete the track from the database if no longer in track list
+			$query->execute(array
+			(
+				":id" => $trackId
+			));
+		}
+		exit;
 	case "allalbums":
 		if (!checkLogin())
 		{
