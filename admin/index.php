@@ -21,6 +21,7 @@ require_once __DIR__ . "/../includes/i18n.php";
 		<script type="text/javascript" src="../js/iframe-transport.js"></script>
 		<script type="text/javascript" src="../js/fileupload.js"></script>
 
+		<script type="text/javascript" src="../js/utils.js"></script>
 		<script type="text/javascript" src="../js/admin.js"></script>
 
 		<script type="text/html" id="album-list-template">

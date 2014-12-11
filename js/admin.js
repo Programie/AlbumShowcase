@@ -47,7 +47,7 @@ $(function()
 				number : highestTrackNumber + 1,
 				title : "",
 				artist : "",
-				length : 0
+				length : "00:00"
 			}
 		]));
 	});
@@ -197,6 +197,16 @@ function showEditAlbum(albumId)
 				$("#edit-album-releasedate").data("datepicker").setDate(moment(data.releaseDate).toDate());
 				$("#edit-album-cover").attr("src", "../albums/" + albumId + ".jpg");
 
+				for (var index in data.tracks)
+				{
+					duration = moment.duration(data.tracks[index].length * 1000);
+
+					minutes = Math.floor(duration.asMinutes()).toString();
+					seconds = duration.seconds().toString();
+
+					data.tracks[index].length = minutes.paddingLeft("00") + ":" + seconds.paddingLeft("00");
+				}
+
 				$("#edit-album-tracklist").html(Mustache.render($("#edit-album-tracklist-template").html(), data.tracks));
 			},
 			url : "../ajax.php?get=albumdata&id=" + albumId
@@ -221,12 +231,26 @@ function saveAlbum()
 
 	$("#edit-album-tracklist").find(".tracklist-row").each(function()
 	{
+		var minutes = 0;
+		var seconds = 0;
+
+		var length = $(this).find(".edit-album-tracklist-length").val().split(":");
+		if (length.length > 1)
+		{
+			minutes = parseInt(length[0]);
+			seconds = parseInt(length[1]);
+		}
+		else
+		{
+			seconds = parseInt(length[0]);
+		}
+
 		tracks.push(
 		{
 			number : parseInt($(this).find(".edit-album-tracklist-number").val()),
 			title : $(this).find(".edit-album-tracklist-title").val(),
 			artist : $(this).find(".edit-album-tracklist-artist").val(),
-			length : parseInt($(this).find(".edit-album-tracklist-length").val())
+			length : minutes * 60 + seconds
 		});
 	});
 
