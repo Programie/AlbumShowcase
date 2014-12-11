@@ -1,8 +1,3 @@
-String.prototype.paddingLeft = function(paddingValue)
-{
-	return String(paddingValue + this).slice(-paddingValue.length);
-};
-
 $(function()
 {
 	$("#albums").on("click", ".tracklist-button", function()

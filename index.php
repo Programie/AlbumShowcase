@@ -15,6 +15,7 @@ require_once __DIR__ . "/includes/i18n.php";
 		<script type="text/javascript" src="js/mustache.js"></script>
 		<script type="text/javascript" src="js/moment.js"></script>
 
+		<script type="text/javascript" src="js/utils.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 
 		<script type="text/html" id="tracklist-template">
