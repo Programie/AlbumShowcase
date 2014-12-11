@@ -52,13 +52,32 @@ $(function()
 		]));
 	});
 
+	$("#delete-confirmation-button").on("click", function()
+	{
+		var deleteConfirmationModal = $("#delete-confirmation");
+
+		$.ajax(
+		{
+			success : function()
+			{
+				loadAlbums();
+				deleteConfirmationModal.modal("hide");
+			},
+			url : "../ajax.php?get=deletealbum&id=" + deleteConfirmationModal.data("albumid")
+		});
+	});
+
 	var albumList = $("#album-list");
 
 	albumList.on("click", ".delete-album", function()
 	{
-		$("#delete-confirmation-album").text($(this).closest(".album-row").find(".album-title").text());
+		var deleteConfirmationModal = $("#delete-confirmation");
+		var albumRow = $(this).closest(".album-row");
 
-		$("#delete-confirmation").modal("show");
+		$("#delete-confirmation-album").text(albumRow.find(".album-title").text());
+
+		deleteConfirmationModal.data("albumid", albumRow.data("albumid"));
+		deleteConfirmationModal.modal("show");
 	});
 
 	albumList.on("click", ".edit-album", function()

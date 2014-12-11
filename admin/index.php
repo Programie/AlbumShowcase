@@ -115,7 +115,7 @@ require_once __DIR__ . "/../includes/config.inc.php";
 						<p>Are you sure to delete the album <strong id="delete-confirmation-album"></strong>?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger">Yes, delete it</button>
+						<button type="button" class="btn btn-danger" id="delete-confirmation-button">Yes, delete it</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 					</div>
 				</div>

@@ -447,6 +447,31 @@ switch($_GET["get"])
 
 		echo "ok";
 		exit;
+	case "deletealbum":
+		if (!checkLogin())
+		{
+			header("HTTP/1.1 401 Authorization Required");
+			exit;
+		}
+
+		if (!isset($_GET["id"]))
+		{
+			header("HTTP/1.1 400 Bad Request");
+			exit;
+		}
+
+		$query = $pdo->prepare("
+			DELETE FROM `albums`
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":id" => $_GET["id"]
+		));
+
+		echo "ok";
+		exit;
 	case "allalbums":
 		if (!checkLogin())
 		{
