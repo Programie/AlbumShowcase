@@ -55,6 +55,11 @@ body
 	width: 340px;
 }
 
+#no-albums-info
+{
+	display: none;
+}
+
 .form-control-group
 {
 	margin-bottom: 10px;

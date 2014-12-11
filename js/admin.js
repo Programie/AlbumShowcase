@@ -364,10 +364,24 @@ function loadAlbums()
 				albumData.releaseDate = moment(albumData.releaseDate).format("L");
 			}
 
-			$("#album-list").html(Mustache.render($("#album-list-template").html(),
+			var noAlbumsInfo = $("#no-albums-info");
+			var albumsTable = $("#albums-table");
+
+			if (data.length)
 			{
-				list : data
-			}));
+				$("#album-list").html(Mustache.render($("#album-list-template").html(),
+				{
+					list : data
+				}));
+
+				noAlbumsInfo.hide();
+				albumsTable.show();
+			}
+			else
+			{
+				noAlbumsInfo.show();
+				albumsTable.hide();
+			}
 		},
 		url : "../ajax.php?get=allalbums"
 	});

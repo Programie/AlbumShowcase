@@ -62,6 +62,11 @@ require_once __DIR__ . "/includes/config.inc.php";
 					</div>
 				</div>
 			{{/list}}
+			{{^list}}
+				<div class="alert alert-danger">
+					<i class="glyphicon glyphicon-exclamation-sign"></i> <strong>No albums available!</strong>
+				</div>
+			{{/list}}
 		</script>
 	</head>
 

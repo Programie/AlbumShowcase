@@ -89,7 +89,7 @@ require_once __DIR__ . "/../includes/config.inc.php";
 			</div>
 
 			<div class="show-loggedin">
-				<div class="table-responsive">
+				<div class="table-responsive" id="albums-table">
 					<table class="table table-striped">
 						<thead>
 							<tr>
@@ -100,6 +100,10 @@ require_once __DIR__ . "/../includes/config.inc.php";
 						</thead>
 						<tbody id="album-list"></tbody>
 					</table>
+				</div>
+
+				<div class="alert alert-danger" id="no-albums-info">
+					<i class="glyphicon glyphicon-exclamation-sign"></i> <strong>No albums available!</strong>
 				</div>
 			</div>
 		</div>
