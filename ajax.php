@@ -508,7 +508,7 @@ switch($_GET["get"])
 		$query = $pdo->query("
 			SELECT `id`, `title`, `releaseDate`
 			FROM `albums`
-			WHERE `releaseDate` >= NOW()
+			WHERE `releaseDate` <= NOW()
 			ORDER BY `releaseDate` DESC
 		");
 
