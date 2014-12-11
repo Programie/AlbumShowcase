@@ -516,6 +516,18 @@ switch($_GET["get"])
 		{
 			$row->id = (int) $row->id;
 
+			// Downloadable archive file must exist
+			if (!file_exists(__DIR__ . "/albums/" . $row->id . ".zip"))
+			{
+				continue;
+			}
+
+			// Cover image must exist
+			if (!file_exists(__DIR__ . "/albums/" . $row->id . ".jpg"))
+			{
+				continue;
+			}
+
 			if (defined("DOWNLOAD_BADGE"))
 			{
 				switch (DOWNLOAD_BADGE)
