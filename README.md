@@ -10,6 +10,7 @@ Album Showcase is a simple showcase and download page which can be used to provi
 
    * A webserver running at least PHP 5.3
    * A MySQL database (other SQL databases which are supported by PHP/PDO should work as well but are not tested)
+   * Optional: Internationalization (intl) PECL extension to get the correct language for the client
 
 ## Configuration
 
