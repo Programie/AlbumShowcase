@@ -13,11 +13,7 @@ function tr($message)
 	return Translation::translate($message);
 }
 
-if (defined("LANGUAGE"))
-{
-	$language = LANGUAGE;
-}
-elseif (isset($_GET["lang"]))
+if (isset($_GET["lang"]))
 {
 	$language = $_GET["lang"];
 }
@@ -28,6 +24,10 @@ elseif (class_exists("Locale"))// Locale class is part of the Internationalizati
 		"de",
 		"en"
 	), Locale::acceptFromHttp($_SERVER["HTTP_ACCEPT_LANGUAGE"]));
+}
+elseif (defined("LANGUAGE"))
+{
+	$language = LANGUAGE;
 }
 else
 {
