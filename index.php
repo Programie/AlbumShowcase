@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/includes/config.inc.php";
+require_once __DIR__ . "/includes/i18n.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,9 +22,9 @@ require_once __DIR__ . "/includes/config.inc.php";
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Title</th>
-						<th>Artist</th>
-						<th>Length</th>
+						<th><?php echo tr("Title");?></th>
+						<th><?php echo tr("Artist");?></th>
+						<th><?php echo tr("Length");?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -55,8 +56,8 @@ require_once __DIR__ . "/includes/config.inc.php";
 						<div class="caption">
 							<h3 class="album-title">{{title}} <small>{{releaseDate}}</small></h3>
 							<p>
-								<a href="download.php/{{id}}/{{title}}.zip" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-cloud-download"></span> Download{{#downloadBadge}} <span class="badge">{{downloadBadge}}</span>{{/downloadBadge}}</a>
-								<button class="btn btn-default tracklist-button" role="button"><span class="glyphicon glyphicon-th-list"></span> Track list</button>
+								<a href="download.php/{{id}}/{{title}}.zip" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-cloud-download"></span> <?php echo tr("Download");?>{{#downloadBadge}} <span class="badge">{{downloadBadge}}</span>{{/downloadBadge}}</a>
+								<button class="btn btn-default tracklist-button" role="button"><span class="glyphicon glyphicon-th-list"></span> <?php echo tr("Track list");?></button>
 							</p>
 						</div>
 					</div>
@@ -64,7 +65,7 @@ require_once __DIR__ . "/includes/config.inc.php";
 			{{/list}}
 			{{^list}}
 				<div class="alert alert-danger">
-					<i class="glyphicon glyphicon-exclamation-sign"></i> <strong>No albums available!</strong>
+					<i class="glyphicon glyphicon-exclamation-sign"></i> <strong><?php echo tr("No albums available!");?></strong>
 				</div>
 			{{/list}}
 		</script>
@@ -96,12 +97,12 @@ require_once __DIR__ . "/includes/config.inc.php";
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo tr("Close");?></span></button>
 						<h4 class="modal-title" id="tracklist-label"></h4>
 					</div>
 					<div class="modal-body" id="tracklist-content"></div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"><?php echo tr("Close");?></button>
 					</div>
 				</div>
 			</div>

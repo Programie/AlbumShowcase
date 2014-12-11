@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../includes/config.inc.php";
+require_once __DIR__ . "/../includes/i18n.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,8 +29,8 @@ require_once __DIR__ . "/../includes/config.inc.php";
 					<td class="album-title">{{title}}</td>
 					<td class="album-releasedate">{{releaseDate}}</td>
 					<td>
-						<button type="button" class="btn btn-sm btn-default edit-album"><i class="glyphicon glyphicon-pencil"></i> Edit</button>
-						<button type="button" class="btn btn-sm btn-danger delete-album"><i class="glyphicon glyphicon-trash"></i> Delete</button>
+						<button type="button" class="btn btn-sm btn-default edit-album"><i class="glyphicon glyphicon-pencil"></i> <?php echo tr("Edit");?></button>
+						<button type="button" class="btn btn-sm btn-danger delete-album"><i class="glyphicon glyphicon-trash"></i> <?php echo tr("Delete");?></button>
 					</td>
 				</tr>
 			{{/list}}
@@ -55,36 +56,36 @@ require_once __DIR__ . "/../includes/config.inc.php";
 			<div class="page-header">
 				<nav class="show-loggedin">
 					<div class="nav nav-pills pull-right">
-						<button type="button" id="new-album-button" class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-plus"></i> New Album</button>
+						<button type="button" id="new-album-button" class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-plus"></i> <?php echo tr("New album");?></button>
 
 						<div class="btn-group">
 							<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<i class="glyphicon glyphicon-user"></i> <span id="user-dropdown-username"></span> <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li role="presentation"><a role="menuitem" href="#" data-toggle="modal" data-target="#change-password"><i class="glyphicon glyphicon-edit"></i> Change Password</a></li>
+								<li role="presentation"><a role="menuitem" href="#" data-toggle="modal" data-target="#change-password"><i class="glyphicon glyphicon-edit"></i> <?php echo tr("Change password");?></a></li>
 								<li class="divider"></li>
-								<li role="presentation"><a role="menuitem" href="#" data-toggle="modal" data-target="#confirm-logout"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+								<li role="presentation"><a role="menuitem" href="#" data-toggle="modal" data-target="#confirm-logout"><i class="glyphicon glyphicon-off"></i> <?php echo tr("Logout");?></a></li>
 							</ul>
 						</div>
 					</div>
 				</nav>
 
-				<h3 class="text-muted"><?php echo PAGE_TITLE;?> - Admin Area</h3>
+				<h3 class="text-muted"><?php echo PAGE_TITLE;?> - <?php echo tr("Admin area");?></h3>
 			</div>
 
 			<div id="login">
 				<form class="form" role="form" onsubmit="login(); return false;">
-					<h2 class="form-heading">Please sign in</h2>
+					<h2 class="form-heading"><?php echo tr("Please sign in");?></h2>
 
 					<p class="label label-danger" id="login-info"></p>
 
 					<div class="form-control-group">
-						<input type="text" id="username" class="form-control form-control-large" placeholder="Username" required="" autofocus=""/>
-						<input type="password" id="password" class="form-control form-control-large" placeholder="Password" required=""/>
+						<input type="text" id="username" class="form-control form-control-large" placeholder="<?php echo tr("Username");?>" required="" autofocus=""/>
+						<input type="password" id="password" class="form-control form-control-large" placeholder="<?php echo tr("Password");?>" required=""/>
 					</div>
 
-					<input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in"/>
+					<input class="btn btn-lg btn-primary btn-block" type="submit" value="<?php echo tr("Sign in");?>"/>
 				</form>
 			</div>
 
@@ -93,8 +94,8 @@ require_once __DIR__ . "/../includes/config.inc.php";
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Title</th>
-								<th>Release Date</th>
+								<th><?php echo tr("Title");?></th>
+								<th><?php echo tr("Release date");?></th>
 								<th></th>
 							</tr>
 						</thead>
@@ -103,7 +104,7 @@ require_once __DIR__ . "/../includes/config.inc.php";
 				</div>
 
 				<div class="alert alert-danger" id="no-albums-info">
-					<i class="glyphicon glyphicon-exclamation-sign"></i> <strong>No albums available!</strong>
+					<i class="glyphicon glyphicon-exclamation-sign"></i> <strong><?php echo tr("No albums available!");?></strong>
 				</div>
 			</div>
 		</div>
@@ -112,15 +113,15 @@ require_once __DIR__ . "/../includes/config.inc.php";
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-						<h4 class="modal-title">Delete Album</h4>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo tr("Close");?></span></button>
+						<h4 class="modal-title"><?php echo tr("Delete album");?></h4>
 					</div>
 					<div class="modal-body">
 						<p>Are you sure to delete the album <strong id="delete-confirmation-album"></strong>?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" id="delete-confirmation-button">Yes, delete it</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-danger" id="delete-confirmation-button"><?php echo tr("Yes, delete it");?></button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo tr("No");?></button>
 					</div>
 				</div>
 			</div>
@@ -130,8 +131,8 @@ require_once __DIR__ . "/../includes/config.inc.php";
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-						<h4 class="modal-title">Change Password</h4>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo tr("Close");?></span></button>
+						<h4 class="modal-title"><?php echo tr("Change password");?></h4>
 					</div>
 					<form role="form" onsubmit="changePassword(); return false;">
 						<div class="modal-body">
@@ -146,8 +147,8 @@ require_once __DIR__ . "/../includes/config.inc.php";
 							</div>
 						</div>
 						<div class="modal-footer">
-							<input type="submit" class="btn btn-primary" value="Apply"/>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Chancel</button>
+							<input type="submit" class="btn btn-primary" value="<?php echo tr("Apply");?>"/>
+							<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo tr("Cancel");?></button>
 						</div>
 					</form>
 				</div>
@@ -159,14 +160,14 @@ require_once __DIR__ . "/../includes/config.inc.php";
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-						<h4 class="modal-title">Logout</h4>
+						<h4 class="modal-title"><?php echo tr("Logout");?></h4>
 					</div>
 					<div class="modal-body">
-						<p>Are you sure to logout?</p>
+						<p><?php echo tr("Are you sure to logout?");?></p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" id="logout">Yes</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-primary" id="logout"><?php echo tr("Yes");?></button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo tr("No");?></button>
 					</div>
 				</div>
 			</div>
@@ -176,7 +177,7 @@ require_once __DIR__ . "/../includes/config.inc.php";
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo tr("Close");?></span></button>
 						<h4 class="modal-title" id="edit-album-modal-title"></h4>
 					</div>
 
@@ -184,20 +185,20 @@ require_once __DIR__ . "/../includes/config.inc.php";
 						<div class="modal-body">
 							<div role="tabpanel">
 								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" class="active"><a href="#edit-album-tab-general" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-cog"></i> General</a></li>
-									<li role="presentation"><a href="#edit-album-tab-tracklist" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-th-list"></i> Tracklist</a></li>
-									<li role="presentation"><a href="#edit-album-tab-cover" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-picture"></i> Cover</a></li>
-									<li role="presentation"><a href="#edit-album-tab-uploadfile" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-cloud-upload"></i> Upload file</a></li>
+									<li role="presentation" class="active"><a href="#edit-album-tab-general" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-cog"></i> <?php echo tr("General");?></a></li>
+									<li role="presentation"><a href="#edit-album-tab-tracklist" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-th-list"></i> <?php echo tr("Track list");?></a></li>
+									<li role="presentation"><a href="#edit-album-tab-cover" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-picture"></i> <?php echo tr("Cover");?></a></li>
+									<li role="presentation"><a href="#edit-album-tab-uploadfile" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-cloud-upload"></i> <?php echo tr("Upload file");?></a></li>
 								</ul>
 
 								<div class="tab-content">
 									<div role="tabpanel" class="tab-pane fade in active" id="edit-album-tab-general">
-										<label for="edit-album-title">Title</label>
+										<label for="edit-album-title"><?php echo tr("Title");?></label>
 										<input type="text" id="edit-album-title" class="form-control"/>
 
 										<br/>
 
-										<label for="edit-album-releasedate">Release Date</label>
+										<label for="edit-album-releasedate"><?php echo tr("Release date");?></label>
 										<input type="date" id="edit-album-releasedate" class="form-control"/>
 									</div>
 
@@ -206,16 +207,16 @@ require_once __DIR__ . "/../includes/config.inc.php";
 											<thead>
 												<tr>
 													<th>#</th>
-													<th>Title</th>
-													<th>Artist</th>
-													<th>Length</th>
+													<th><?php echo tr("Title");?></th>
+													<th><?php echo tr("Artist");?></th>
+													<th><?php echo tr("Length");?></th>
 													<th></th>
 												</tr>
 											</thead>
 											<tbody id="edit-album-tracklist"></tbody>
 										</table>
 
-										<button type="button" class="btn btn-default" id="edit-album-addtrack"><i class="glyphicon glyphicon-plus"></i> Add new track</button>
+										<button type="button" class="btn btn-default" id="edit-album-addtrack"><i class="glyphicon glyphicon-plus"></i> <?php echo tr("Add new track");?></button>
 									</div>
 
 									<div role="tabpanel" class="tab-pane fade" id="edit-album-tab-cover">
@@ -239,8 +240,8 @@ require_once __DIR__ . "/../includes/config.inc.php";
 							</div>
 						</div>
 						<div class="modal-footer">
-							<input type="submit" class="btn btn-primary" value="Save"/>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<input type="submit" class="btn btn-primary" value="<?php echo tr("Save");?>"/>
+							<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo tr("Cancel");?></button>
 						</div>
 					</form>
 				</div>
