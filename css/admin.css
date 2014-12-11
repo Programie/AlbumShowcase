@@ -43,9 +43,16 @@ body
 	display: none;
 }
 
-#edit-album-tab-general
+#edit-album-tab-general, #edit-album-tab-cover, #edit-album-tab-uploadfile
 {
 	padding: 10px;
+}
+
+#edit-album-cover
+{
+	display: block;
+	margin: 0 auto;
+	width: 340px;
 }
 
 .form-control-group

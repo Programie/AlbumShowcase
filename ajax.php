@@ -394,6 +394,59 @@ switch($_GET["get"])
 			));
 		}
 		exit;
+	case "uploadfile":
+		if (!checkLogin())
+		{
+			header("HTTP/1.1 401 Authorization Required");
+			exit;
+		}
+
+		if (!isset($_GET["id"]) or !isset($_GET["type"]))
+		{
+			header("HTTP/1.1 400 Bad Request");
+			exit;
+		}
+
+		$albumId = $_GET["id"];
+
+		$query = $pdo->prepare("
+			SELECT `id`
+			FROM `albums`
+			WHERE `id` = :id
+		");
+
+		$query->execute(array
+		(
+			":id" => $albumId
+		));
+
+		if (!$query->rowCount())
+		{
+			header("HTTP/1.1 404 Not Found");
+			exit;
+		}
+
+		switch ($_GET["type"])
+		{
+			case "cover":
+				$fileExtension = "jpg";
+				break;
+			case "upload":
+				$fileExtension = "zip";
+				break;
+			default:
+				header("HTTP/1.1 400 Bad Request");
+				exit;
+		}
+
+		if (!@move_uploaded_file($_FILES["file"]["tmp_name"], __DIR__ . "/albums/" . $albumId . "." . $fileExtension))
+		{
+			header("HTTP/1.1 500 Internal Server Error");
+			exit;
+		}
+
+		echo "ok";
+		exit;
 	case "allalbums":
 		if (!checkLogin())
 		{

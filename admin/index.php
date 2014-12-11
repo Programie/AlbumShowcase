@@ -16,6 +16,10 @@ require_once __DIR__ . "/../includes/config.inc.php";
 		<script type="text/javascript" src="../js/moment.js"></script>
 		<script type="text/javascript" src="../js/datepicker.js"></script>
 
+		<script type="text/javascript" src="../js/jquery-ui-widget.js"></script>
+		<script type="text/javascript" src="../js/iframe-transport.js"></script>
+		<script type="text/javascript" src="../js/fileupload.js"></script>
+
 		<script type="text/javascript" src="../js/admin.js"></script>
 
 		<script type="text/html" id="album-list-template">
@@ -178,6 +182,8 @@ require_once __DIR__ . "/../includes/config.inc.php";
 								<ul class="nav nav-tabs" role="tablist">
 									<li role="presentation" class="active"><a href="#edit-album-tab-general" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-cog"></i> General</a></li>
 									<li role="presentation"><a href="#edit-album-tab-tracklist" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-th-list"></i> Tracklist</a></li>
+									<li role="presentation"><a href="#edit-album-tab-cover" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-picture"></i> Cover</a></li>
+									<li role="presentation"><a href="#edit-album-tab-uploadfile" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-cloud-upload"></i> Upload file</a></li>
 								</ul>
 
 								<div class="tab-content">
@@ -190,6 +196,7 @@ require_once __DIR__ . "/../includes/config.inc.php";
 										<label for="edit-album-releasedate">Release Date</label>
 										<input type="date" id="edit-album-releasedate" class="form-control"/>
 									</div>
+
 									<div role="tabpanel" class="tab-pane fade" id="edit-album-tab-tracklist">
 										<table class="table table-striped">
 											<thead>
@@ -205,6 +212,24 @@ require_once __DIR__ . "/../includes/config.inc.php";
 										</table>
 
 										<button type="button" class="btn btn-default" id="edit-album-addtrack"><i class="glyphicon glyphicon-plus"></i> Add new track</button>
+									</div>
+
+									<div role="tabpanel" class="tab-pane fade" id="edit-album-tab-cover">
+										<img id="edit-album-cover"/>
+
+										<div class="progress" id="edit-album-uploadcover-progressbar-container">
+											<div role="progressbar" id="edit-album-uploadcover-progressbar"></div>
+										</div>
+
+										<input type="file" id="edit-album-uploadcover" name="file"/>
+									</div>
+
+									<div role="tabpanel" class="tab-pane fade" id="edit-album-tab-uploadfile">
+										<div class="progress" id="edit-album-uploadfile-progressbar-container">
+											<div role="progressbar" id="edit-album-uploadfile-progressbar"></div>
+										</div>
+
+										<input type="file" id="edit-album-uploadfile" name="file"/>
 									</div>
 								</div>
 							</div>

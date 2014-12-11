@@ -66,6 +66,61 @@ $(function()
 		showEditAlbum($(this).closest(".album-row").data("albumid"));
 	});
 
+	var uploadCoverProgressbar = $("#edit-album-uploadcover-progressbar");
+	var uploadFileProgressbar = $("#edit-album-uploadfile-progressbar");
+
+	$("#edit-album-uploadcover").fileupload(
+	{
+		done : function()
+		{
+			$("#edit-album-uploadcover-progressbar-container").hide();
+			$("#edit-album-cover").attr("src", "../albums/" + $("#edit-album").data("albumid") + ".jpg?timestamp=" + new Date().getTime());
+		},
+		fail : function()
+		{
+			uploadCoverProgressbar[0].className = "progress-bar progress-bar-danger progress-bar-striped";
+			uploadCoverProgressbar.text("Failed");
+		},
+		progress : function (event, data)
+		{
+			var percent = parseInt(data.loaded / data.total * 100, 10) + "%";
+			uploadCoverProgressbar[0].className = "progress-bar progress-bar-success progress-bar-striped active";
+			uploadCoverProgressbar.css("width", percent);
+			uploadCoverProgressbar.text(percent)
+		},
+		start : function()
+		{
+			uploadCoverProgressbar[0].className = "";
+			$("#edit-album-uploadcover-progressbar-container").show();
+		}
+	});
+
+	$("#edit-album-uploadfile").fileupload(
+	{
+		done : function()
+		{
+			uploadFileProgressbar[0].className = "progress-bar progress-bar-success progress-bar-striped";
+			uploadFileProgressbar.text("Finished");
+		},
+		fail : function()
+		{
+			uploadFileProgressbar[0].className = "progress-bar progress-bar-danger progress-bar-striped";
+			uploadFileProgressbar.text("Failed");
+		},
+		progress : function (event, data)
+		{
+			var percent = parseInt(data.loaded / data.total * 100, 10) + "%";
+			uploadFileProgressbar[0].className = "progress-bar progress-bar-success progress-bar-striped active";
+			uploadFileProgressbar.css("width", percent);
+			uploadFileProgressbar.text(percent)
+		},
+		start : function()
+		{
+			uploadFileProgressbar[0].className = "";
+			$("#edit-album-uploadfile-progressbar-container").show();
+		}
+	});
+
 	$.ajax(
 	{
 		dataType : "json",
@@ -106,6 +161,9 @@ function showEditAlbum(albumId)
 	$("#edit-album-title").val("");
 	$("#edit-album-releasedate").data("datepicker").setDate(new Date());
 	$("#edit-album-tracklist").html("");
+	$("#edit-album-cover").attr("src", "");
+	$("#edit-album-uploadcover-progressbar-container").hide();
+	$("#edit-album-uploadfile-progressbar-container").hide();
 	editAlbumElement.data("albumid", albumId);
 
 	if (albumId)
@@ -118,12 +176,22 @@ function showEditAlbum(albumId)
 				$("#edit-album-modal-title").text("Edit album - " + data.title);
 				$("#edit-album-title").val(data.title);
 				$("#edit-album-releasedate").data("datepicker").setDate(moment(data.releaseDate).toDate());
+				$("#edit-album-cover").attr("src", "../albums/" + albumId + ".jpg");
 
 				$("#edit-album-tracklist").html(Mustache.render($("#edit-album-tracklist-template").html(), data.tracks));
 			},
 			url : "../ajax.php?get=albumdata&id=" + albumId
 		});
 	}
+
+	var uploadCover = $("#edit-album-uploadcover");
+	var uploadFile = $("#edit-album-uploadfile");
+
+	uploadCover.attr("disabled", !albumId);
+	uploadFile.attr("disabled", !albumId);
+
+	uploadCover.fileupload("option", "url", "../ajax.php?get=uploadfile&id=" + albumId + "&type=cover");
+	uploadFile.fileupload("option", "url", "../ajax.php?get=uploadfile&id=" + albumId + "&type=upload");
 
 	editAlbumElement.modal("show");
 }
