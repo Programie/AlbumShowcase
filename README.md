@@ -1,6 +1,6 @@
 # Album Showcase
 
-**Note: This software is in an early development stage and not ready for production yet!**
+**Note: This software is currently in beta stage! It may eat the Internet.**
 
 ## What is it?
 
