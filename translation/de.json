@@ -28,5 +28,6 @@
 	"Save" : "Speichern",
 	"Download" : "Herunterladen",
 	"Username" : "Benutzername",
-	"Password" : "Passwort"
+	"Password" : "Passwort",
+	"Read from meta data" : "Von Metadaten lesen"
 }
