@@ -52,6 +52,19 @@ $(function()
 		]));
 	});
 
+	$("#edit-album-readfrommetadata").on("click", function()
+	{
+		$.ajax(
+		{
+			dataType : "json",
+			success : function(data)
+			{
+				buildTracklist(data);
+			},
+			url : "../ajax.php?get=metadata&id=" + $("#edit-album").data("albumid")
+		});
+	});
+
 	$("#delete-confirmation-button").on("click", function()
 	{
 		var deleteConfirmationModal = $("#delete-confirmation");
@@ -172,6 +185,21 @@ function shake(element)
 	}
 }
 
+function buildTracklist(data)
+{
+	for (var index in data)
+	{
+		var duration = moment.duration(data[index].length * 1000);
+
+		var minutes = Math.floor(duration.asMinutes()).toString();
+		var seconds = duration.seconds().toString();
+
+		data[index].length = minutes.paddingLeft("00") + ":" + seconds.paddingLeft("00");
+	}
+
+	$("#edit-album-tracklist").html(Mustache.render($("#edit-album-tracklist-template").html(), data));
+}
+
 function showEditAlbum(albumId)
 {
 	var editAlbumElement = $("#edit-album");
@@ -197,17 +225,7 @@ function showEditAlbum(albumId)
 				$("#edit-album-releasedate").data("datepicker").setDate(moment(data.releaseDate).toDate());
 				$("#edit-album-cover").attr("src", "../albums/" + albumId + ".jpg");
 
-				for (var index in data.tracks)
-				{
-					duration = moment.duration(data.tracks[index].length * 1000);
-
-					minutes = Math.floor(duration.asMinutes()).toString();
-					seconds = duration.seconds().toString();
-
-					data.tracks[index].length = minutes.paddingLeft("00") + ":" + seconds.paddingLeft("00");
-				}
-
-				$("#edit-album-tracklist").html(Mustache.render($("#edit-album-tracklist-template").html(), data.tracks));
+				buildTracklist(data.tracks);
 			},
 			url : "../ajax.php?get=albumdata&id=" + albumId
 		});

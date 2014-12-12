@@ -218,6 +218,7 @@ require_once __DIR__ . "/../includes/i18n.php";
 										</table>
 
 										<button type="button" class="btn btn-default" id="edit-album-addtrack"><i class="glyphicon glyphicon-plus"></i> <?php echo tr("Add new track");?></button>
+										<button type="button" class="btn btn-default" id="edit-album-readfrommetadata"><i class="glyphicon glyphicon-file"></i> <?php echo tr("Read from meta data");?></button>
 									</div>
 
 									<div role="tabpanel" class="tab-pane fade" id="edit-album-tab-cover">

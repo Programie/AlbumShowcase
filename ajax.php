@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/includes/config.inc.php";
 require_once __DIR__ . "/includes/Database.class.php";
+require_once __DIR__ . "/vendor/james-heinrich/getid3/getid3/getid3.php";
 
 /**
  * Short the given number to make it human readable.
@@ -581,6 +582,100 @@ switch($_GET["get"])
 
 			$list[] = $row;
 		}
+
+		echo json_encode($list);
+		exit;
+	case "metadata":
+		if (!checkLogin())
+		{
+			header("HTTP/1.1 401 Authorization Required");
+			exit;
+		}
+
+		if (!isset($_GET["id"]))
+		{
+			header("HTTP/1.1 400 Bad Request");
+			exit;
+		}
+
+		$zipFile = __DIR__ . "/albums/" . $_GET["id"] . ".zip";
+
+		if (!file_exists($zipFile))
+		{
+			header("HTTP/1.1 404 Not Found");
+			exit;
+		}
+
+		$zipArchive = new ZipArchive();
+		$zipArchive->open($zipFile);
+
+		$list = array();
+
+		for ($index = 0; $index < $zipArchive->numFiles; $index++)
+		{
+			$tmpFilename = tempnam(sys_get_temp_dir(), "zip");
+
+			unlink($tmpFilename);
+
+			$filename = $zipArchive->getNameIndex($index);
+
+			$pathInfo = pathinfo($filename);
+
+			$tmpFilename .= "." . $pathInfo["extension"];
+
+			copy("zip://" . $zipFile . "#" . $filename, $tmpFilename);
+
+			$id3 = new getID3();
+
+			$fileInfo = $id3->analyze($tmpFilename);
+
+			getid3_lib::CopyTagsToComments($fileInfo);
+
+			unlink($tmpFilename);
+
+			$track = new StdClass;
+
+			if (isset($fileInfo["playtime_seconds"]))
+			{
+				$track->length = (int) $fileInfo["playtime_seconds"];
+			}
+
+			if (isset($fileInfo["comments"]["artist"][0]))
+			{
+				$track->artist = $fileInfo["comments"]["artist"][0];
+			}
+
+			if (isset($fileInfo["comments"]["title"][0]))
+			{
+				$track->title = $fileInfo["comments"]["title"][0];
+			}
+
+			if (isset($fileInfo["comments"]["track"][0]))
+			{
+				$track->number = (int) $fileInfo["comments"]["track"][0];
+			}
+
+			$trackArray = (array) $track;
+
+			if (empty($trackArray))
+			{
+				continue;
+			}
+
+			if (!$track->artist and !$track->title)
+			{
+				$track->title = $pathInfo["filename"];
+			}
+
+			$list[] = $track;
+		}
+
+		$zipArchive->close();
+
+		usort($list, function($item1, $item2)
+		{
+			return $item1->number > $item2->number;
+		});
 
 		echo json_encode($list);
 		exit;

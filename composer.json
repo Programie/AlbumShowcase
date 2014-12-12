@@ -1,0 +1,19 @@
+{
+	"name" : "programie/albumshowcase",
+	"description" : "A showcase and download page for albums (music)",
+	"minimum-stability" : "stable",
+	"license" : "",
+	"authors" :
+	[
+		{
+			"name" : "Michael Wieland",
+			"email" : "albumshowcase@selfcoders.com",
+			"homepage" : "http://selfcoders.com",
+			"role" : "Developer"
+		}
+	],
+	"require":
+	{
+		"james-heinrich/getid3": "dev-master"
+	}
+}
