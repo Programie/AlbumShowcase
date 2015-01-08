@@ -2,6 +2,8 @@
 config.inc.php
 vendor
 
+favicon.ico
+
 # OS X
 ._*
 .AppleDouble
