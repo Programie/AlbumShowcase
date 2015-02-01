@@ -165,9 +165,7 @@ $(function()
 
 	$("#stats").on("shown.bs.modal", function()
 	{
-		var data = $("#stats").data("data");
-
-		Flotr.draw($("#stats-container")[0], [data.data],
+		Flotr.draw($("#stats-container")[0], [$("#stats").data("data")],
 		{
 			xaxis :
 			{
@@ -186,8 +184,7 @@ $(function()
 				{
 					return "<b>" + moment(parseInt(object.x)).format("L") + "</b><br/>" + parseInt(object.y) + " downloads";
 				}
-			},
-			title : "Stats for " + moment(data.startDate).format("L") + " - " + moment(data.endDate).format("L")
+			}
 		});
 	});
 
@@ -469,9 +466,9 @@ function loadAlbums()
 
 function showStats(data)
 {
+	$("#stats-modal-title").text("Stats for " + moment(data.startDate).format("L") + " - " + moment(data.endDate).format("L"));
+
 	var modal = $("#stats");
-
+	modal.data("data", data.data);
 	modal.modal("show");
-
-	modal.data("data", data);
 }

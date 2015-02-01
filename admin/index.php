@@ -259,7 +259,9 @@ require_once __DIR__ . "/../includes/i18n.php";
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo tr("Close");?></span></button>
 						<h4 class="modal-title" id="stats-modal-title"></h4>
 
-						<div id="stats-container"></div>
+						<div class="modal-body">
+							<div id="stats-container"></div>
+						</div>
 					</div>
 				</div>
 			</div>
