@@ -127,7 +127,7 @@ $albums = array
 	array
 	(
 		"title" => "The best Samples",
-		"releaseDate" => date("Y") . "-12-01",
+		"releaseDate" => date("Y-m-d", time() - 60 * 60 * 24 * 30),
 		"tracks" => array
 		(
 			array
