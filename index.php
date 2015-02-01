@@ -73,6 +73,8 @@ require_once __DIR__ . "/includes/i18n.php";
 	</head>
 
 	<body>
+		<div id="wallpaper"></div>
+
 		<div class="container">
 			<div class="page-header">
 				<nav>
