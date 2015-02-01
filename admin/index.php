@@ -30,6 +30,7 @@ require_once __DIR__ . "/../includes/i18n.php";
 				<tr class="album-row" data-albumid="{{id}}">
 					<td class="album-title">{{title}}</td>
 					<td class="album-releasedate">{{releaseDate}}</td>
+					<td class="album-downloads">{{downloads}}</td>
 					<td>
 						<button type="button" class="btn btn-sm btn-default show-album-stats"><i class="glyphicon glyphicon-stats"></i> <?php echo tr("Stats");?></button>
 						<button type="button" class="btn btn-sm btn-default edit-album"><i class="glyphicon glyphicon-pencil"></i> <?php echo tr("Edit");?></button>
@@ -99,6 +100,7 @@ require_once __DIR__ . "/../includes/i18n.php";
 							<tr>
 								<th><?php echo tr("Title");?></th>
 								<th><?php echo tr("Release date");?></th>
+								<th><?php echo tr("Downloads");?></th>
 								<th></th>
 							</tr>
 						</thead>

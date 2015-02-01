@@ -30,5 +30,6 @@
 	"Username" : "Benutzername",
 	"Password" : "Passwort",
 	"Read from meta data" : "Von Metadaten lesen",
-	"Stats" : "Stats"
+	"Stats" : "Stats",
+	"Downloads" : "Downloads"
 }

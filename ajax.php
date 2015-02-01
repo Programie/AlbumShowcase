@@ -567,6 +567,12 @@ switch($_GET["get"])
 			exit;
 		}
 
+		$downloadsQuery = $pdo->prepare("
+			SELECT COUNT(`id`) AS `count`
+			FROM `downloads`
+			WHERE `albumId` = :albumId
+		");
+
 		$query = $pdo->query("
 			SELECT `id`, `title`, `releaseDate`
 			FROM `albums`
@@ -578,6 +584,13 @@ switch($_GET["get"])
 		while ($row = $query->fetch())
 		{
 			$row->id = (int) $row->id;
+
+			$downloadsQuery->execute(array
+			(
+				":albumId" => $row->id
+			));
+
+			$row->downloads = (int) $downloadsQuery->fetch()->count;
 
 			$list[] = $row;
 		}
