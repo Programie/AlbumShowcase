@@ -190,6 +190,93 @@ switch($_GET["get"])
 			"ok" => true
 		));
 		exit;
+	case "getstats":
+		if (!checkLogin())
+		{
+			header("HTTP/1.1 401 Authorization Required");
+			exit;
+		}
+
+		if (isset($_GET["end"]))
+		{
+			$endDate = new DateTime($_GET["end"]);
+		}
+		else
+		{
+			$endDate = new DateTime();
+		}
+
+		if (isset($_GET["start"]))
+		{
+			$startDate = new DateTime($_GET["start"]);
+		}
+		else
+		{
+			$startDate = clone $endDate;
+			$startDate->sub(new DateInterval("P1M"));// Default to the last month
+		}
+
+		$period = new DatePeriod($startDate, new DateInterval("P1D"), $endDate);
+
+		/**
+		 * @var $date DateTime
+		 */
+		foreach ($period as $date)
+		{
+			$data[$date->format("Y-m-d")] = 0;
+		}
+
+		if (isset($_GET["id"]))
+		{
+			$query = $pdo->prepare("
+				SELECT `date`
+				FROM `downloads`
+				WHERE `albumId` = :albumId AND `date` BETWEEN :startDate AND :endDate
+			");
+
+			$query->execute(array
+			(
+				":albumId" => $_GET["id"],
+				":startDate" => $startDate->format("Y-m-d H:i:s"),
+				":endDate" => $endDate->format("Y-m-d H:i:s")
+			));
+		}
+		else
+		{
+			$query = $pdo->prepare("
+				SELECT `date`
+				FROM `downloads`
+				WHERE `date` BETWEEN :startDate AND :endDate
+			");
+
+			$query->execute(array
+			(
+				":startDate" => $startDate->format("Y-m-d H:i:s"),
+				":endDate" => $endDate->format("Y-m-d H:i:s")
+			));
+		}
+
+		while ($row = $query->fetch())
+		{
+			$date = new DateTime($row->date);
+
+			$data[$date->format("Y-m-d")]++;
+		}
+
+		$convertedData = array();
+		foreach ($data as $date => $count)
+		{
+			$convertedData[] = array(strtotime($date) * 1000, $count);
+		}
+
+		header("Content-Type: application/json");
+		echo json_encode(array
+		(
+			"data" => $convertedData,
+			"startDate" => $startDate->getTimestamp() * 1000,
+			"endDate" => $endDate->getTimestamp() * 1000
+		));
+		exit;
 	case "albumdata":
 		if (!checkLogin())
 		{

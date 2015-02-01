@@ -98,6 +98,16 @@ $(function()
 		showEditAlbum($(this).closest(".album-row").data("albumid"));
 	});
 
+	albumList.on("click", ".show-album-stats", function()
+	{
+		$.ajax(
+		{
+			dataType : "json",
+			success : showStats,
+			url : "../ajax.php?get=getstats&id=" + $(this).closest(".album-row").data("albumid")
+		});
+	});
+
 	var uploadCoverProgressbar = $("#edit-album-uploadcover-progressbar");
 	var uploadFileProgressbar = $("#edit-album-uploadfile-progressbar");
 
@@ -151,6 +161,34 @@ $(function()
 			uploadFileProgressbar[0].className = "";
 			$("#edit-album-uploadfile-progressbar-container").show();
 		}
+	});
+
+	$("#stats").on("shown.bs.modal", function()
+	{
+		var data = $("#stats").data("data");
+
+		Flotr.draw($("#stats-container")[0], [data.data],
+		{
+			xaxis :
+			{
+				minorTickFreq : 4,
+				mode : "time"
+			},
+			grid :
+			{
+				minorVerticalLines : true
+			},
+			mouse :
+			{
+				track : true,
+				relative : true,
+				trackFormatter : function(object)
+				{
+					return "<b>" + moment(parseInt(object.x)).format("L") + "</b><br/>" + parseInt(object.y) + " downloads";
+				}
+			},
+			title : "Stats for " + moment(data.startDate).format("L") + " - " + moment(data.endDate).format("L")
+		});
 	});
 
 	$.ajax(
@@ -427,4 +465,13 @@ function loadAlbums()
 		},
 		url : "../ajax.php?get=allalbums"
 	});
+}
+
+function showStats(data)
+{
+	var modal = $("#stats");
+
+	modal.modal("show");
+
+	modal.data("data", data);
 }

@@ -16,6 +16,7 @@ require_once __DIR__ . "/../includes/i18n.php";
 		<script type="text/javascript" src="../js/mustache.js"></script>
 		<script type="text/javascript" src="../js/moment.js"></script>
 		<script type="text/javascript" src="../js/datepicker.js"></script>
+		<script type="text/javascript" src="../js/flotr2.js"></script>
 
 		<script type="text/javascript" src="../js/jquery-ui-widget.js"></script>
 		<script type="text/javascript" src="../js/iframe-transport.js"></script>
@@ -30,6 +31,7 @@ require_once __DIR__ . "/../includes/i18n.php";
 					<td class="album-title">{{title}}</td>
 					<td class="album-releasedate">{{releaseDate}}</td>
 					<td>
+						<button type="button" class="btn btn-sm btn-default show-album-stats"><i class="glyphicon glyphicon-stats"></i> <?php echo tr("Stats");?></button>
 						<button type="button" class="btn btn-sm btn-default edit-album"><i class="glyphicon glyphicon-pencil"></i> <?php echo tr("Edit");?></button>
 						<button type="button" class="btn btn-sm btn-danger delete-album"><i class="glyphicon glyphicon-trash"></i> <?php echo tr("Delete");?></button>
 					</td>
@@ -246,6 +248,19 @@ require_once __DIR__ . "/../includes/i18n.php";
 							<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo tr("Cancel");?></button>
 						</div>
 					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="stats" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo tr("Close");?></span></button>
+						<h4 class="modal-title" id="stats-modal-title"></h4>
+
+						<div id="stats-container"></div>
+					</div>
 				</div>
 			</div>
 		</div>

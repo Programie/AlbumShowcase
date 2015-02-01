@@ -60,6 +60,11 @@ body
 	display: none;
 }
 
+#stats-container
+{
+	height: 600px;
+}
+
 .form-control-group
 {
 	margin-bottom: 10px;
