@@ -18,6 +18,3 @@ define("DOWNLOAD_BADGE", "size");// Show the file size of the download
 
 // Set whether to track downloads (false or remove the definition to disable download tracking)
 define("TRACK_DOWNLOADS", true);
-
-// Set whether to show the admin login button (false or remove the definition to hide it)
-define("SHOW_ADMIN_LOGIN", true);

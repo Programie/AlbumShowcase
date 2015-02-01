@@ -75,20 +75,24 @@ require_once __DIR__ . "/includes/i18n.php";
 	<body>
 		<div class="container">
 			<div class="page-header">
-				<?php
-				if (defined("SHOW_ADMIN_LOGIN") and SHOW_ADMIN_LOGIN)
-				{
-				?>
-					<nav>
-						<div class="nav nav-pills pull-right">
-							<a href="admin">
-								<button class="btn btn-default btn-sm" role="button"><i class="glyphicon glyphicon-wrench"></i> Admin</button>
-							</a>
-						</div>
-					</nav>
-				<?php
-				}
-				?>
+				<nav>
+					<ul id="navbar-right" class="nav nav-pills pull-right">
+						<?php
+						$linksFile = __DIR__ . "/includes/links.json";
+						if (file_exists($linksFile))
+						{
+							$linksData = json_decode(file_get_contents($linksFile));
+							foreach ($linksData as $linkData)
+							{
+								echo "<li><a href=\"" . $linkData->url . "\" target=\"" . ($linkData->target ?: "") . "\">" . $linkData->title . "</a></li>";
+							}
+						}
+						?>
+						<li>
+							<a href="admin" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-wrench"></i> Admin</a>
+						</li>
+					</ul>
+				</nav>
 				<h3 class="text-muted"><?php echo PAGE_TITLE;?></h3>
 			</div>
 			<div class="row" id="albums"></div>
