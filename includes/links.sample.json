@@ -1,0 +1,11 @@
+[
+	{
+		"url" : "http://example.com",
+		"title" : "Example Page"
+	},
+	{
+		"url" : "http://example.com/another-page",
+		"title" : "Another Page",
+		"target" : "_blank"
+	}
+]

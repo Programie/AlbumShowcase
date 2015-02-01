@@ -1,5 +1,6 @@
 .idea
-config.inc.php
+includes/config.inc.php
+includes/links.json
 vendor
 
 favicon.ico
