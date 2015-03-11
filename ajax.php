@@ -293,7 +293,7 @@ switch($_GET["get"])
 		$albumId = $_GET["id"];
 
 		$query = $pdo->prepare("
-			SELECT `title`, `releaseDate`
+			SELECT `title`, `artist`, `releaseDate`
 			FROM `albums`
 			WHERE `id` = :id
 		");
@@ -354,7 +354,7 @@ switch($_GET["get"])
 			exit;
 		}
 
-		if (!isset($data->title) or !isset($data->releaseDate) or !isset($data->tracks) or !is_array($data->tracks))
+		if (!isset($data->title) or !isset($data->artist) or !isset($data->releaseDate) or !isset($data->tracks) or !is_array($data->tracks))
 		{
 			header("HTTP/1.1 400 Bad Request");
 			exit;
@@ -366,6 +366,7 @@ switch($_GET["get"])
 				UPDATE `albums`
 				SET
 					`title` = :title,
+					`artist` = :artist,
 					`releaseDate` = :releaseDate
 				WHERE `id` = :id
 			");
@@ -373,6 +374,7 @@ switch($_GET["get"])
 			$query->execute(array
 			(
 				":title" => $data->title,
+				":artist" => $data->artist,
 				":releaseDate" => $data->releaseDate,
 				":id" => $albumId
 			));
@@ -383,12 +385,14 @@ switch($_GET["get"])
 				INSERT INTO `albums`
 				SET
 					`title` = :title,
+					`artist` = :artist,
 					`releaseDate` = :releaseDate
 			");
 
 			$query->execute(array
 			(
 				":title" => $data->title,
+				":artist" => $data->artist,
 				":releaseDate" => $data->releaseDate
 			));
 
@@ -574,7 +578,7 @@ switch($_GET["get"])
 		");
 
 		$query = $pdo->query("
-			SELECT `id`, `title`, `releaseDate`
+			SELECT `id`, `title`, `artist`, `releaseDate`
 			FROM `albums`
 			ORDER BY `releaseDate` DESC
 		");
@@ -607,7 +611,7 @@ switch($_GET["get"])
 		");
 
 		$query = $pdo->query("
-			SELECT `id`, `title`, `releaseDate`
+			SELECT `id`, `title`, `artist`, `releaseDate`
 			FROM `albums`
 			WHERE `releaseDate` <= NOW()
 			ORDER BY `releaseDate` DESC

@@ -1,6 +1,7 @@
 CREATE TABLE `albums` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
+  `artist` varchar(200) NOT NULL,
   `releaseDate` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

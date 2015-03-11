@@ -29,6 +29,7 @@ require_once __DIR__ . "/../includes/i18n.php";
 			{{#list}}
 				<tr class="album-row" data-albumid="{{id}}">
 					<td class="album-title">{{title}}</td>
+					<td class="album-artist">{{artist}}</td>
 					<td class="album-releasedate">{{releaseDate}}</td>
 					<td class="album-downloads">{{downloads}}</td>
 					<td>
@@ -101,6 +102,7 @@ require_once __DIR__ . "/../includes/i18n.php";
 						<thead>
 							<tr>
 								<th><?php echo tr("Title");?></th>
+								<th><?php echo tr("Artist");?></th>
 								<th><?php echo tr("Release date");?></th>
 								<th><?php echo tr("Downloads");?></th>
 								<th></th>
@@ -202,6 +204,11 @@ require_once __DIR__ . "/../includes/i18n.php";
 									<div role="tabpanel" class="tab-pane fade in active" id="edit-album-tab-general">
 										<label for="edit-album-title"><?php echo tr("Title");?></label>
 										<input type="text" id="edit-album-title" class="form-control"/>
+
+										<br/>
+
+										<label for="edit-album-artist"><?php echo tr("Artist");?></label>
+										<input type="text" id="edit-album-artist" class="form-control"/>
 
 										<br/>
 

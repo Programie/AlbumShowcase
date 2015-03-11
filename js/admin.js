@@ -241,6 +241,7 @@ function showEditAlbum(albumId)
 
 	$("#edit-album-modal-title").text("New album");
 	$("#edit-album-title").val("");
+	$("#edit-album-artist").val("");
 	$("#edit-album-releasedate").data("datepicker").setDate(new Date());
 	$("#edit-album-tracklist").html("");
 	$("#edit-album-cover").attr("src", "");
@@ -257,6 +258,7 @@ function showEditAlbum(albumId)
 			{
 				$("#edit-album-modal-title").text("Edit album - " + data.title);
 				$("#edit-album-title").val(data.title);
+				$("#edit-album-artist").val(data.artist);
 				$("#edit-album-releasedate").data("datepicker").setDate(moment(data.releaseDate).toDate());
 				$("#edit-album-cover").attr("src", "../albums/" + albumId + ".jpg");
 
@@ -320,6 +322,7 @@ function saveAlbum()
 		data : JSON.stringify(
 		{
 			title : $("#edit-album-title").val(),
+			artist : $("#edit-album-artist").val(),
 			releaseDate : moment($("#edit-album-releasedate").data("datepicker").getDate()).format("YYYY-MM-DD"),
 			tracks : tracks
 		}),

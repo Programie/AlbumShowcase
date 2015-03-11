@@ -55,10 +55,12 @@ require_once __DIR__ . "/includes/i18n.php";
 					<div class="well well-sm thumbnail album" data-albumid="{{id}}">
 						<img src="albums/{{id}}.jpg"/>
 						<div class="caption">
-							<h3 class="album-title">
-								{{title}}<br/>
-								<small>{{releaseDate}}</small>
-							</h3>
+							<p>
+								<div class="album-artist">{{artist}}</div>
+								<div class="album-title">{{title}}</div>
+								<div class="album-releasedate">{{releaseDate}}</div>
+							</p>
+
 							<p>
 								<a href="download.php/{{id}}/{{title}}.zip" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-cloud-download"></span> <?php echo tr("Download");?>{{#downloadBadge}} <span class="badge">{{downloadBadge}}</span>{{/downloadBadge}}</a>
 								<button class="btn btn-default tracklist-button" role="button"><span class="glyphicon glyphicon-th-list"></span> <?php echo tr("Track list");?></button>

@@ -15,3 +15,20 @@
 	background-size: auto 100%;
 	z-index: -1;
 }
+
+.album-artist
+{
+	font-size: 18px;
+}
+
+.album-title
+{
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.album-releasedate
+{
+	font-size: 16px;
+	color: #777;
+}
