@@ -60,6 +60,8 @@ require_once __DIR__ . "/../includes/i18n.php";
 			<div class="page-header">
 				<nav class="show-loggedin">
 					<div class="nav nav-pills pull-right">
+						<a href=".."><button type="button" class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-home"></i> <?php echo tr("Home");?></button></a>
+
 						<button type="button" id="new-album-button" class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-plus"></i> <?php echo tr("New album");?></button>
 
 						<div class="btn-group">
