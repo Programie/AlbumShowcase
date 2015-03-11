@@ -17,6 +17,7 @@ $albumQuery = $pdo->prepare("
 	INSERT INTO `albums`
 	SET
 		`title` = :title,
+		`artist` = :artist,
 		`releaseDate` = :releaseDate
 ");
 
@@ -43,6 +44,7 @@ $albums = array
 	array
 	(
 		"title" => "My Album",
+		"artist" => "Me",
 		"releaseDate" => date("Y") . "-05-01",
 		"tracks" => array
 		(
@@ -69,6 +71,7 @@ $albums = array
 	array
 	(
 		"title" => "We found Samples",
+		"artist" => "You",
 		"releaseDate" => date("Y") . "-09-16",
 		"tracks" => array
 		(
@@ -101,6 +104,7 @@ $albums = array
 	array
 	(
 		"title" => "Resampled",
+		"artist" => "You & Me",
 		"releaseDate" => date("Y") . "-10-20",
 		"tracks" => array
 		(
@@ -127,6 +131,7 @@ $albums = array
 	array
 	(
 		"title" => "The best Samples",
+		"artist" => "We",
 		"releaseDate" => date("Y-m-d", time() - 60 * 60 * 24 * 30),
 		"tracks" => array
 		(
@@ -159,6 +164,7 @@ foreach ($albums as $album)
 	$albumQuery->execute(array
 	(
 		":title" => $album["title"],
+		":artist" => $album["artist"],
 		":releaseDate" => $album["releaseDate"]
 	));
 
