@@ -55,6 +55,11 @@ body
 	width: 340px;
 }
 
+#new-album-button
+{
+	cursor: pointer;
+}
+
 #no-albums-info
 {
 	display: none;

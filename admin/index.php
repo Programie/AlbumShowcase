@@ -59,26 +59,26 @@ require_once __DIR__ . "/../includes/i18n.php";
 	<body>
 		<div class="container">
 			<div class="page-header">
-				<nav class="show-loggedin">
-					<div class="nav nav-pills pull-right">
-						<a href=".."><button type="button" class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-home"></i> <?php echo tr("Home");?></button></a>
-
-						<button type="button" id="new-album-button" class="btn btn-sm btn-default" role="button"><i class="glyphicon glyphicon-plus"></i> <?php echo tr("New album");?></button>
-
-						<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-								<i class="glyphicon glyphicon-user"></i> <span id="user-dropdown-username"></span> <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li role="presentation"><a role="menuitem" href="#" data-toggle="modal" data-target="#change-password"><i class="glyphicon glyphicon-edit"></i> <?php echo tr("Change password");?></a></li>
-								<li class="divider"></li>
-								<li role="presentation"><a role="menuitem" href="#" data-toggle="modal" data-target="#confirm-logout"><i class="glyphicon glyphicon-off"></i> <?php echo tr("Logout");?></a></li>
-							</ul>
+				<nav class="show-loggedin navbar navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<span class="navbar-brand"><?php echo PAGE_TITLE;?> - <?php echo tr("Admin area");?></span>
 						</div>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href=".."><i class="glyphicon glyphicon-home"></i> <?php echo tr("Home");?></a></li>
+							<li><a id="new-album-button"><i class="glyphicon glyphicon-plus"></i> <?php echo tr("New album");?></a></li>
+
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <span id="user-dropdown-username"></span> <span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li role="presentation"><a role="menuitem" href="#" data-toggle="modal" data-target="#change-password"><i class="glyphicon glyphicon-edit"></i> <?php echo tr("Change password");?></a></li>
+									<li class="divider"></li>
+									<li role="presentation"><a role="menuitem" href="#" data-toggle="modal" data-target="#confirm-logout"><i class="glyphicon glyphicon-off"></i> <?php echo tr("Logout");?></a></li>
+								</ul>
+							</li>
+						</ul>
 					</div>
 				</nav>
-
-				<h3 class="text-muted"><?php echo PAGE_TITLE;?> - <?php echo tr("Admin area");?></h3>
 			</div>
 
 			<div id="login">
