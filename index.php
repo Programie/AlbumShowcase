@@ -81,9 +81,17 @@ require_once __DIR__ . "/includes/i18n.php";
 		<div id="wallpaper"></div>
 
 		<div class="container">
-			<div class="page-header">
-				<nav>
-					<ul id="navbar-right" class="nav nav-pills pull-right">
+			<nav id="navbar" class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<span class="navbar-brand"><?php echo PAGE_TITLE;?></span>
+					</div>
+
+					<div class="navbar-form navbar-right">
+						<a href="admin"><button role="button" class="btn btn-default"><i class="glyphicon glyphicon-wrench"></i> Admin</button></a>
+					</div>
+
+					<ul class="nav navbar-nav navbar-right">
 						<?php
 						$linksFile = __DIR__ . "/includes/links.json";
 						if (file_exists($linksFile))
@@ -95,13 +103,10 @@ require_once __DIR__ . "/includes/i18n.php";
 							}
 						}
 						?>
-						<li>
-							<a href="admin" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-wrench"></i> Admin</a>
-						</li>
 					</ul>
-				</nav>
-				<h3 class="text-muted"><?php echo PAGE_TITLE;?></h3>
-			</div>
+				</div>
+			</nav>
+
 			<div class="row" id="albums"></div>
 		</div>
 

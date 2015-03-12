@@ -1,7 +1,6 @@
-#navbar-right > li > a
+#navbar
 {
-	padding-top: 5px;
-	padding-bottom: 5px;
+	margin-top: 30px;
 }
 
 #wallpaper
