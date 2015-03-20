@@ -616,9 +616,6 @@ class Albums extends AbstractService
 		);
 	}
 
-	/**
-	 * @RequireLogin
-	 */
 	public function getTrackList()
 	{
 		$list = $this->buildTracklist($this->parameters->id);
