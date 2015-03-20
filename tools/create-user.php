@@ -1,6 +1,8 @@
 <?php
-require_once __DIR__ . "/../includes/config.inc.php";
-require_once __DIR__ . "/../includes/Database.class.php";
+use com\selfcoders\albumshowcase\DBConnection;
+use com\selfcoders\albumshowcase\Utils;
+
+require_once __DIR__ . "/../bootstrap.php";
 
 if (count($argv) < 2)
 {
@@ -14,7 +16,7 @@ if (count($argv) < 2)
 $username = $argv[1];
 $replace = @$argv[2];
 
-$pdo = Database::getConnection();
+$pdo = DBConnection::getConnection();
 
 $query = $pdo->prepare("
 	SELECT `id`
@@ -66,7 +68,6 @@ else
 	$password = implode("", $password);
 }
 
-$hash = hash("sha512", $password);
 $salt = rand(0, 10000);
 
 $query = $pdo->prepare("
@@ -80,7 +81,7 @@ $query = $pdo->prepare("
 $query->execute(array
 (
 	":username" => $username,
-	":password" => hash("sha512", $hash . $salt, true),
+	":password" => Utils::getPasswordHash($password, $salt),
 	":passwordSalt" => $salt
 ));
 

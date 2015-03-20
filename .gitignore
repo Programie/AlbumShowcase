@@ -1,9 +1,7 @@
 .idea
-includes/config.inc.php
-includes/links.json
 vendor
 
-favicon.ico
+httpdocs/favicon.ico
 
 # OS X
 ._*

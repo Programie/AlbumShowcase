@@ -1,0 +1,34 @@
+{
+  "name": "Album Showcase",
+  "version": "1.0.0",
+  "homepage": "http://albumshowcase-demo.selfcoders.com",
+  "authors": [
+    "Programie <github@selfcoders.com>"
+  ],
+  "description": "A showcase and download page for albums (music)",
+  "main": "index.php",
+  "keywords": [
+    "album",
+    "showcase",
+    "music",
+    "download",
+    "portal"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "mustache": "~1.1.0",
+    "moment": "~2.9.0",
+    "flotr2": "*",
+    "blueimp-file-upload": "~9.9.3",
+    "bootstrap-datepicker": "~1.4.0",
+    "jquery-ui": "~1.11.4"
+  }
+}

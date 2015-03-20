@@ -3,15 +3,16 @@
  * This script can be used to generate demo albums (e.g. to see how the application looks like).
  */
 
-require_once __DIR__ . "/../includes/config.inc.php";
-require_once __DIR__ . "/../includes/Database.class.php";
+use com\selfcoders\albumshowcase\DBConnection;
+
+require_once __DIR__ . "/../bootstrap.php";
 
 function writeLog($string)
 {
 	echo "[" . date("Y-m-d H:i:s") . "] " . $string . "\n";
 }
 
-$pdo = Database::getConnection();
+$pdo = DBConnection::getConnection();
 
 $albumQuery = $pdo->prepare("
 	INSERT INTO `albums`
