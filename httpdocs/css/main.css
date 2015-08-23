@@ -18,7 +18,7 @@
 
 .album
 {
-	// Not the best way to force the same height for all albums...
+	/* Not the best way to force the same height for all albums... */
 	height: 523px;
 }
 
