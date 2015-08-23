@@ -16,6 +16,12 @@
 	z-index: -1;
 }
 
+.album
+{
+	// Not the best way to force the same height for all albums...
+	height: 523px;
+}
+
 .album-artist
 {
 	font-size: 18px;
