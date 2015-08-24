@@ -9,6 +9,8 @@ require_once __DIR__ . "/../bootstrap.php";
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
 		<link rel="stylesheet" href="css/main.css" type="text/css"/>
 
+		<link rel="icon" type="image/png" href="favicon.png"/>
+
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="bower_components/mustache/mustache.min.js"></script>
