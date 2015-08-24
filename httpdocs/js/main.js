@@ -1,5 +1,7 @@
 $(function()
 {
+	moment.locale(window.navigator.userLanguage || window.navigator.language);
+
 	$("#albums").on("click", ".tracklist-button", function()
 	{
 		$("#tracklist").modal("show");

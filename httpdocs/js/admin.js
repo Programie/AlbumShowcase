@@ -1,5 +1,7 @@
 $(function()
 {
+	moment.locale(window.navigator.userLanguage || window.navigator.language);
+
 	$("#change-password-apply").on("click", changePassword);
 
 	$("#logout").on("click", function()
