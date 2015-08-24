@@ -1,6 +1,7 @@
 .idea
 vendor
 
+httpdocs/bower_components
 httpdocs/favicon.*
 
 # OS X
