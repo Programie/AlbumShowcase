@@ -276,7 +276,7 @@ class Albums extends AbstractService
 		$query = $this->pdo->prepare("
 			SELECT `id`
 			FROM `albums`
-			WHERE `id` = :id AND `releaseDate` <= NOW()
+			WHERE `id` = :id
 		");
 
 		$query->execute(array
