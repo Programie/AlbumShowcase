@@ -89,7 +89,7 @@ require_once __DIR__ . "/../bootstrap.php";
 					</div>
 
 					<div class="navbar-form navbar-right">
-						<a href="admin"><button role="button" class="btn btn-default"><i class="glyphicon glyphicon-wrench"></i> Login</button></a>
+						<a href="admin"><button role="button" class="btn btn-default"><i class="glyphicon glyphicon-log-in"></i> Login</button></a>
 					</div>
 
 					<ul class="nav navbar-nav navbar-right">
