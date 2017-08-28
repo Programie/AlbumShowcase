@@ -59,9 +59,11 @@ catch (ServiceConfigurationException $exception)
 {
 	header("HTTP/1.1 500 Internal Server Error");
 	echo $exception->getCode();
+	error_log($exception);
 }
 catch (Exception $exception)
 {
 	header("HTTP/1.1 500 Internal Server Error");
 	echo "Error while executing method!";
+	error_log($exception);
 }
