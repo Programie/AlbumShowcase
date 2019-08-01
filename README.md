@@ -23,7 +23,3 @@ Album Showcase is a simple showcase and download page which can be used to provi
    * Create an alias **service** pointing to **service/index.php** (e.g. **Alias /service /var/www/albumshowcase/service/index.php**)
    * Make sure the user running the webserver (e.g. www-data) has write permission to the **albums** folder (otherwise you can't upload files!)
    * Create a new user using the [create-user.php](/tools/create-user.php) script located in the [tools directory](/tools) (execute it from the command line).
-
-## Demo
-
-A demo of Album Showcase can be found [here](http://albumshowcase-demo.selfcoders.com). The username and password for the admin area is "demo".
